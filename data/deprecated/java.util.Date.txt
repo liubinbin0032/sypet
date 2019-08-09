@@ -1,4 +1,3 @@
-Properties.save(OutputStream,String)
 Date.Date(int,int,int)
 Date.Date(int,int,int,int,int)
 Date.Date(int,int,int,int,int,int)
