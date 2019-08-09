@@ -1,0 +1,59 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: true
+     [java] Including constraint: true
+     [java] Patterns Number: 80
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/3/benchmark3.json
+     [java] Benchmark Id: 3
+     [java] Method name: invert
+     [java] Packages: [org.apache.commons.math.linear]
+     [java] Libraries: [./lib/commons-math-2.2.jar]
+     [java] Source type(s): [double[][]]
+     [java] Target type: double[][]
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] #Classes: 64
+     [java] #Methods: 1228
+     [java] PetriNet for path length: 1 [places: 85 ; transitions: 1534 ; edges: 4214]
+     [java] PetriNet for path length: 2 [places: 85 ; transitions: 1534 ; edges: 4214]
+     [java] PetriNet for path length: 3 [places: 85 ; transitions: 1534 ; edges: 4214]
+     [java] PetriNet for path length: 4 [places: 85 ; transitions: 1534 ; edges: 4214]
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 3
+     [java] Soot Time: 6180.726045
+     [java] Sketch Generation Time: 1216.988368
+     [java] Sketch Completion Time: 352.88813700000014
+     [java] Compilation Time: 2679.5948149999995
+     [java] Running Test cases Time: 3724.0646869999982
+     [java] Synthesis Time: 7973.536006999998
+     [java] Total Time: 14154.262051999998
+     [java] Number of components: 3
+     [java] Number of holes: 6
+     [java] Number of completed programs: 117
+     [java] Number of sketches: 59
+     [java] current sketch:[<org.apache.commons.math.linear.MatrixUtils: org.apache.commons.math.linear.RealMatrix createRealMatrix(double[][])>, <org.apache.commons.math.linear.SingularValueDecompositionImpl: void <init>(org.apache.commons.math.linear.RealMatrix)><-org.apache.commons.math.linear.SingularValueDecompositionImpl-><org.apache.commons.math.linear.SingularValueDecomposition: org.apache.commons.math.linear.DecompositionSolver getSolver()>Poly:(org.apache.commons.math.linear.SingularValueDecompositionImpl )<-org.apache.commons.math.linear.DecompositionSolver-><org.apache.commons.math.linear.DecompositionSolver: org.apache.commons.math.linear.RealMatrix getInverse()>, <org.apache.commons.math.linear.RealMatrix: double[][] getData()>]
+     [java] Solution:
+     [java]  org.apache.commons.math.linear.RealMatrix sypet_var248 = org.apache.commons.math.linear.MatrixUtils.createRealMatrix(sypet_arg0);
+     [java]  org.apache.commons.math.linear.SingularValueDecompositionImpl sypet_var249 = new org.apache.commons.math.linear.SingularValueDecompositionImpl(sypet_var248);
+     [java]  org.apache.commons.math.linear.DecompositionSolver sypet_var250 = sypet_var249.getSolver();
+     [java]  org.apache.commons.math.linear.RealMatrix sypet_var251 = sypet_var250.getInverse();
+     [java]  double[][] sypet_var252 = sypet_var251.getData();
+     [java]  return sypet_var252;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 21 seconds

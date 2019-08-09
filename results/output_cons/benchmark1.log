@@ -1,0 +1,107 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: false
+     [java] Including constraint: true
+     [java] Patterns Number: 40
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/1/benchmark1.json
+     [java] Benchmark Id: 1
+     [java] Method name: solveLinear
+     [java] Packages: [org.apache.commons.math3.linear]
+     [java] Libraries: [./lib/commons-math3-3.5.jar]
+     [java] Source type(s): [double[][], double[]]
+     [java] Target type: double[]
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] #Classes: 79
+     [java] #Methods: 1267
+     [java] PetriNet for path length: 1 [places: 119 ; transitions: 1212 ; edges: 3229]
+     [java] PetriNet for path length: 2 [places: 119 ; transitions: 1212 ; edges: 3229]
+     [java] PetriNet for path length: 3 [places: 119 ; transitions: 1212 ; edges: 3229]
+     [java] PetriNet for path length: 4 [places: 119 ; transitions: 1212 ; edges: 3229]
+     [java] PetriNet for path length: 5 [places: 119 ; transitions: 1212 ; edges: 3229]
+     [java] PetriNet for path length: 6 [places: 119 ; transitions: 1212 ; edges: 3229]
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var3026 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var3027 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var3026);org.apache.commons.math3.linear.RealMatrix sypet_var3028 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);int sypet_var3029 = sypet_var3027.getIndex();double[] sypet_var3030 = sypet_var3028.getRow(sypet_var3029);return sypet_var3030;}
+     [java]                                                                                                                                                                               ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var3026 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var3027 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var3026);org.apache.commons.math3.linear.RealMatrix sypet_var3028 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);int sypet_var3029 = sypet_var3027.getIndex();double[] sypet_var3030 = sypet_var3028.getRow(sypet_var3029);return sypet_var3030;}
+     [java]                                                                                                                                                                                                                                                    ^
+     [java] 2 errors
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var11119 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var11120 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var11119);org.apache.commons.math3.linear.BlockRealMatrix sypet_var11121 = new org.apache.commons.math3.linear.BlockRealMatrix(sypet_arg0);int sypet_var11122 = sypet_var11120.getIndex();double[] sypet_var11123 = sypet_var11121.getColumn(sypet_var11122);return sypet_var11123;}
+     [java]                                                                                                                                                                                ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var11119 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var11120 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var11119);org.apache.commons.math3.linear.BlockRealMatrix sypet_var11121 = new org.apache.commons.math3.linear.BlockRealMatrix(sypet_arg0);int sypet_var11122 = sypet_var11120.getIndex();double[] sypet_var11123 = sypet_var11121.getColumn(sypet_var11122);return sypet_var11123;}
+     [java]                                                                                                                                                                                                                                                      ^
+     [java] 2 errors
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var12041 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var12042 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var12041);int sypet_var12043 = sypet_var12042.getIndex();org.apache.commons.math3.linear.BlockRealMatrix sypet_var12044 = new org.apache.commons.math3.linear.BlockRealMatrix(sypet_arg0);double[] sypet_var12045 = sypet_var12044.getRow(sypet_var12043);return sypet_var12045;}
+     [java]                                                                                                                                                                                ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var12041 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var12042 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var12041);int sypet_var12043 = sypet_var12042.getIndex();org.apache.commons.math3.linear.BlockRealMatrix sypet_var12044 = new org.apache.commons.math3.linear.BlockRealMatrix(sypet_arg0);double[] sypet_var12045 = sypet_var12044.getRow(sypet_var12043);return sypet_var12045;}
+     [java]                                                                                                                                                                                                                                                      ^
+     [java] 2 errors
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var14195 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var14196 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var14195);int sypet_var14197 = sypet_var14196.getIndex();org.apache.commons.math3.linear.RealMatrix sypet_var14198 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);double[] sypet_var14199 = sypet_var14198.getColumn(sypet_var14197);return sypet_var14199;}
+     [java]                                                                                                                                                                                ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var14195 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var14196 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var14195);int sypet_var14197 = sypet_var14196.getIndex();org.apache.commons.math3.linear.RealMatrix sypet_var14198 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);double[] sypet_var14199 = sypet_var14198.getColumn(sypet_var14197);return sypet_var14199;}
+     [java]                                                                                                                                                                                                                                                      ^
+     [java] 2 errors
+     [java] PetriNet for path length: 7 [places: 119 ; transitions: 1212 ; edges: 3229]
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var25277 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector sypet_var25278 = sypet_var25277.copy();org.apache.commons.math3.linear.RealVector.Entry sypet_var25279 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var25278);org.apache.commons.math3.linear.RealMatrix sypet_var25280 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);int sypet_var25281 = sypet_var25279.getIndex();double[] sypet_var25282 = sypet_var25280.getRow(sypet_var25281);return sypet_var25282;}
+     [java]                                                                                                                                                                                                                                                                  ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var25277 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector sypet_var25278 = sypet_var25277.copy();org.apache.commons.math3.linear.RealVector.Entry sypet_var25279 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var25278);org.apache.commons.math3.linear.RealMatrix sypet_var25280 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);int sypet_var25281 = sypet_var25279.getIndex();double[] sypet_var25282 = sypet_var25280.getRow(sypet_var25281);return sypet_var25282;}
+     [java]                                                                                                                                                                                                                                                                                                                                        ^
+     [java] 2 errors
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var25908 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var25909 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var25908);org.apache.commons.math3.linear.Array2DRowRealMatrix sypet_var25910 = new org.apache.commons.math3.linear.Array2DRowRealMatrix(sypet_arg0);int sypet_var25911 = sypet_var25909.getIndex();org.apache.commons.math3.linear.RealMatrix sypet_var25912 = sypet_var25910.copy();double[] sypet_var25913 = sypet_var25912.getColumn(sypet_var25911);return sypet_var25913;}
+     [java]                                                                                                                                                                                ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var25908 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var25909 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var25908);org.apache.commons.math3.linear.Array2DRowRealMatrix sypet_var25910 = new org.apache.commons.math3.linear.Array2DRowRealMatrix(sypet_arg0);int sypet_var25911 = sypet_var25909.getIndex();org.apache.commons.math3.linear.RealMatrix sypet_var25912 = sypet_var25910.copy();double[] sypet_var25913 = sypet_var25912.getColumn(sypet_var25911);return sypet_var25913;}
+     [java]                                                                                                                                                                                                                                                      ^
+     [java] 2 errors
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var49251 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.BlockRealMatrix sypet_var49252 = new org.apache.commons.math3.linear.BlockRealMatrix(sypet_arg0);org.apache.commons.math3.linear.RealVector.Entry sypet_var49253 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var49251);int sypet_var49254 = sypet_var49252.getColumnDimension();sypet_var49253.setIndex(sypet_var49254);return sypet_arg1;}
+     [java]                                                                                                                                                                                                                                                                                                                 ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealVector sypet_var49251 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.BlockRealMatrix sypet_var49252 = new org.apache.commons.math3.linear.BlockRealMatrix(sypet_arg0);org.apache.commons.math3.linear.RealVector.Entry sypet_var49253 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var49251);int sypet_var49254 = sypet_var49252.getColumnDimension();sypet_var49253.setIndex(sypet_var49254);return sypet_arg1;}
+     [java]                                                                                                                                                                                                                                                                                                                                                                                       ^
+     [java] 2 errors
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealMatrix sypet_var50529 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);org.apache.commons.math3.linear.RealVector sypet_var50530 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var50531 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var50530);int sypet_var50532 = sypet_var50531.getIndex();org.apache.commons.math3.linear.RealMatrix sypet_var50533 = sypet_var50529.transpose();double[] sypet_var50534 = sypet_var50533.getColumn(sypet_var50532);return sypet_var50534;}
+     [java]                                                                                                                                                                                                                                                                                                                     ^
+     [java] /Source.java:3: error: RealVector.Entry has protected access in RealVector
+     [java] org.apache.commons.math3.linear.RealMatrix sypet_var50529 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);org.apache.commons.math3.linear.RealVector sypet_var50530 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);org.apache.commons.math3.linear.RealVector.Entry sypet_var50531 = new org.apache.commons.math3.linear.RealVector.Entry(sypet_var50530);int sypet_var50532 = sypet_var50531.getIndex();org.apache.commons.math3.linear.RealMatrix sypet_var50533 = sypet_var50529.transpose();double[] sypet_var50534 = sypet_var50533.getColumn(sypet_var50532);return sypet_var50534;}
+     [java]                                                                                                                                                                                                                                                                                                                                                                                           ^
+     [java] 2 errors
+
+BUILD FAILED
+/root/workspace/liubinbin/sypet_pattern/build.xml:43: Java returned: 143
+
+Total time: 16 minutes 58 seconds

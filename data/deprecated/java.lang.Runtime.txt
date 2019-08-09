@@ -1,3 +1,0 @@
-Runtime.runFinalizersOnExit(boolean)
-Runtime.getLocalizedInputStream(InputStream)
-Runtime.getLocalizedOutputStream(OutputStream)

@@ -1,0 +1,273 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: true
+     [java] Including constraint: true
+     [java] Patterns Number: 10
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/3/benchmark3.json
+     [java] Benchmark Id: 3
+     [java] Method name: invert
+     [java] Packages: [org.apache.commons.math.linear]
+     [java] Libraries: [./lib/commons-math-2.2.jar]
+     [java] Source type(s): [double[][]]
+     [java] Target type: double[][]
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] #Classes: 64
+     [java] #Methods: 1228
+     [java] PetriNet for path length: 1 [places: 85 ; transitions: 1201 ; edges: 3131]
+     [java] PetriNet for path length: 2 [places: 85 ; transitions: 1201 ; edges: 3131]
+     [java] PetriNet for path length: 3 [places: 85 ; transitions: 1201 ; edges: 3131]
+     [java] PetriNet for path length: 4 [places: 85 ; transitions: 1201 ; edges: 3131]
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] PetriNet for path length: 5 [places: 85 ; transitions: 1201 ; edges: 3131]
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] PetriNet for path length: 6 [places: 85 ; transitions: 1201 ; edges: 3131]
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] Note: /Source.java uses or overrides a deprecated API.
+     [java] Note: Recompile with -Xlint:deprecation for details.
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 3
+     [java] Soot Time: 5481.196738
+     [java] Sketch Generation Time: 14680.995376999988
+     [java] Sketch Completion Time: 3900.058192999993
+     [java] Compilation Time: 17803.019396999993
+     [java] Running Test cases Time: 56862.43455999997
+     [java] Synthesis Time: 93246.50752699995
+     [java] Total Time: 98727.70426499995
+     [java] Number of components: 5
+     [java] Number of holes: 6
+     [java] Number of completed programs: 2731
+     [java] Number of sketches: 1328
+     [java] current sketch:[<org.apache.commons.math.linear.MatrixUtils: org.apache.commons.math.linear.RealMatrix createRealMatrix(double[][])>, <org.apache.commons.math.linear.SingularValueDecompositionImpl: void <init>(org.apache.commons.math.linear.RealMatrix)>, <org.apache.commons.math.linear.SingularValueDecompositionImpl: org.apache.commons.math.linear.DecompositionSolver getSolver()>, <org.apache.commons.math.linear.DecompositionSolver: org.apache.commons.math.linear.RealMatrix getInverse()>, <org.apache.commons.math.linear.RealMatrix: double[][] getData()>]
+     [java] Solution:
+     [java]  org.apache.commons.math.linear.RealMatrix sypet_var8134 = org.apache.commons.math.linear.MatrixUtils.createRealMatrix(sypet_arg0);
+     [java]  org.apache.commons.math.linear.SingularValueDecompositionImpl sypet_var8135 = new org.apache.commons.math.linear.SingularValueDecompositionImpl(sypet_var8134);
+     [java]  org.apache.commons.math.linear.DecompositionSolver sypet_var8136 = sypet_var8135.getSolver();
+     [java]  org.apache.commons.math.linear.RealMatrix sypet_var8137 = sypet_var8136.getInverse();
+     [java]  double[][] sypet_var8138 = sypet_var8137.getData();
+     [java]  return sypet_var8138;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 1 minute 45 seconds

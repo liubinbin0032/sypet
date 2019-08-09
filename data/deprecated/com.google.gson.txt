@@ -1,4 +1,0 @@
-JsonNull.JsonNull()
-TypeToken.isAssignableFrom(Class)
-TypeToken.isAssignableFrom(Type)
-TypeToken.isAssignableFrom(TypeToken)

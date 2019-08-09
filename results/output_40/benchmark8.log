@@ -1,0 +1,58 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: true
+     [java] Including constraint: true
+     [java] Patterns Number: 40
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/8/benchmark8.json
+     [java] Benchmark Id: 8
+     [java] Method name: getAge
+     [java] Packages: [org.joda.time]
+     [java] Libraries: [./lib/joda-time-2.8.2.jar]
+     [java] Source type(s): [org.joda.time.DateTime]
+     [java] Target type: int
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] Warning: org.joda.convert.ToString is a phantom class!
+     [java] Warning: org.joda.convert.FromString is a phantom class!
+     [java] #Classes: 145
+     [java] #Methods: 3197
+     [java] PetriNet for path length: 1 [places: 178 ; transitions: 3300 ; edges: 8958]
+     [java] PetriNet for path length: 2 [places: 178 ; transitions: 3300 ; edges: 8958]
+     [java] PetriNet for path length: 3 [places: 178 ; transitions: 3300 ; edges: 8958]
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 8
+     [java] Soot Time: 2517.91527
+     [java] Sketch Generation Time: 4559.559268
+     [java] Sketch Completion Time: 1124.8061220000004
+     [java] Compilation Time: 7290.338100999995
+     [java] Running Test cases Time: 216.20073999999997
+     [java] Synthesis Time: 13190.904230999997
+     [java] Total Time: 15708.819500999994
+     [java] Number of components: 2
+     [java] Number of holes: 4
+     [java] Number of completed programs: 608
+     [java] Number of sketches: 303
+     [java] current sketch:[<org.joda.time.DateTime: org.joda.time.DateTime now()>, <org.joda.time.Years: org.joda.time.Years yearsBetween(org.joda.time.ReadableInstant,org.joda.time.ReadableInstant)>Poly:(org.joda.time.DateTime org.joda.time.DateTime )<-org.joda.time.Years-><org.joda.time.Years: int getYears()>]
+     [java] Solution:
+     [java]  org.joda.time.DateTime sypet_var912 = org.joda.time.DateTime.now();
+     [java]  org.joda.time.Years sypet_var913 = org.joda.time.Years.yearsBetween(sypet_arg0,sypet_var912);
+     [java]  int sypet_var914 = sypet_var913.getYears();
+     [java]  return sypet_var914;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 20 seconds

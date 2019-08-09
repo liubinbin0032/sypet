@@ -1,0 +1,85 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: false
+     [java] Including constraint: false
+     [java] Patterns Number: 30
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/20/benchmark20.json
+     [java] Benchmark Id: 20
+     [java] Method name: readFile
+     [java] Packages: [java.io]
+     [java] Libraries: [./lib/rt7.jar]
+     [java] Source type(s): [java.lang.String]
+     [java] Target type: int
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.spec.DESKeySpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DESedeKeySpec is a phantom class!
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.spec.SecretKeySpec is a phantom class!
+     [java] Warning: javax.crypto.SecretKeyFactory is a phantom class!
+     [java] Warning: javax.crypto.spec.IvParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] Warning: javax.crypto.spec.PBEKeySpec is a phantom class!
+     [java] Warning: javax.crypto.Mac is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: sun.security.ssl.Krb5Helper is a phantom class!
+     [java] Warning: com.oracle.jrockit.jfr.FlightRecorder is a phantom class!
+     [java] Warning: sun.security.ssl.SSLSocketImpl is a phantom class!
+     [java] Warning: javax.crypto.CipherInputStream is a phantom class!
+     [java] Warning: javax.crypto.CipherOutputStream is a phantom class!
+     [java] Warning: sun.nio.cs.ext.EUC_TW$Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.EUC_TW$Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.DoubleByteEncoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0201$Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0201$Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0208_Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0208_Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0212_Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0212_Decoder is a phantom class!
+     [java] Warning: javax.crypto.spec.PBEParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DHParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DHPublicKeySpec is a phantom class!
+     [java] Warning: javax.crypto.interfaces.DHKey is a phantom class!
+     [java] Warning: javax.crypto.interfaces.DHPublicKey is a phantom class!
+     [java] Warning: javax.crypto.spec.OAEPParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.PSource is a phantom class!
+     [java] Warning: javax.crypto.spec.PSource$PSpecified is a phantom class!
+     [java] Warning: javax.crypto.KeyGenerator is a phantom class!
+     [java] #Classes: 80
+     [java] #Methods: 1031
+     [java] PetriNet for path length: 1 [places: 109 ; transitions: 909 ; edges: 2361]
+     [java] PetriNet for path length: 2 [places: 109 ; transitions: 909 ; edges: 2361]
+     [java] PetriNet for path length: 3 [places: 109 ; transitions: 909 ; edges: 2361]
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 20
+     [java] Soot Time: 12196.022965
+     [java] Sketch Generation Time: 142.223515
+     [java] Sketch Completion Time: 22.326826999999998
+     [java] Compilation Time: 961.672552
+     [java] Running Test cases Time: 0.725105
+     [java] Synthesis Time: 1126.947999
+     [java] Total Time: 13322.970964
+     [java] Number of components: 2
+     [java] Number of holes: 3
+     [java] Number of completed programs: 5
+     [java] Number of sketches: 3
+     [java] current sketch:[<java.io.FileInputStream: void <init>(java.lang.String)>, <java.io.FileInputStream: int read()>]
+     [java] Solution:
+     [java]  java.io.FileInputStream sypet_var8 = new java.io.FileInputStream(sypet_arg0);
+     [java]  int sypet_var9 = sypet_var8.read();
+     [java]  return sypet_var9;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 15 seconds

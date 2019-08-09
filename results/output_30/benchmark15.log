@@ -1,0 +1,95 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: true
+     [java] Including constraint: true
+     [java] Patterns Number: 30
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/15/benchmark15.json
+     [java] Benchmark Id: 15
+     [java] Method name: createDom
+     [java] Packages: [org.w3c.dom, javax.xml.parsers]
+     [java] Libraries: [./lib/rt7.jar]
+     [java] Source type(s): [java.lang.String]
+     [java] Target type: org.w3c.dom.Document
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.spec.DESKeySpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DESedeKeySpec is a phantom class!
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.spec.SecretKeySpec is a phantom class!
+     [java] Warning: javax.crypto.SecretKeyFactory is a phantom class!
+     [java] Warning: javax.crypto.spec.IvParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] Warning: javax.crypto.spec.PBEKeySpec is a phantom class!
+     [java] Warning: javax.crypto.Mac is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: sun.security.ssl.Krb5Helper is a phantom class!
+     [java] Warning: com.oracle.jrockit.jfr.FlightRecorder is a phantom class!
+     [java] Warning: sun.security.ssl.SSLSocketImpl is a phantom class!
+     [java] Warning: javax.crypto.CipherInputStream is a phantom class!
+     [java] Warning: javax.crypto.CipherOutputStream is a phantom class!
+     [java] Warning: sun.nio.cs.ext.EUC_TW$Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.EUC_TW$Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.DoubleByteEncoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0201$Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0201$Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0208_Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0208_Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0212_Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0212_Decoder is a phantom class!
+     [java] Warning: javax.crypto.spec.PBEParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DHParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DHPublicKeySpec is a phantom class!
+     [java] Warning: javax.crypto.interfaces.DHKey is a phantom class!
+     [java] Warning: javax.crypto.interfaces.DHPublicKey is a phantom class!
+     [java] Warning: javax.crypto.spec.OAEPParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.PSource is a phantom class!
+     [java] Warning: javax.crypto.spec.PSource$PSpecified is a phantom class!
+     [java] Warning: javax.crypto.KeyGenerator is a phantom class!
+     [java] #Classes: 153
+     [java] #Methods: 1337
+     [java] PetriNet for path length: 1 [places: 178 ; transitions: 1677 ; edges: 4230]
+     [java] PetriNet for path length: 2 [places: 178 ; transitions: 1677 ; edges: 4230]
+     [java] PetriNet for path length: 3 [places: 178 ; transitions: 1677 ; edges: 4230]
+     [java] PetriNet for path length: 4 [places: 178 ; transitions: 1677 ; edges: 4230]
+     [java] PetriNet for path length: 5 [places: 178 ; transitions: 1677 ; edges: 4230]
+     [java] PetriNet for path length: 6 [places: 178 ; transitions: 1677 ; edges: 4230]
+     [java] [Fatal Error] :1:1: Content is not allowed in prolog.
+     [java] [Fatal Error] :1:1: Content is not allowed in prolog.
+     [java] PetriNet for path length: 7 [places: 178 ; transitions: 1677 ; edges: 4230]
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 15
+     [java] Soot Time: 17303.909677
+     [java] Sketch Generation Time: 98491.00571000025
+     [java] Sketch Completion Time: 16510.589134000013
+     [java] Compilation Time: 53810.21104800006
+     [java] Running Test cases Time: 4053.029623000004
+     [java] Synthesis Time: 172864.83551500033
+     [java] Total Time: 190168.74519200032
+     [java] Number of components: 6
+     [java] Number of holes: 9
+     [java] Number of completed programs: 7486
+     [java] Number of sketches: 3486
+     [java] current sketch:[<javax.xml.parsers.DocumentBuilderFactory: javax.xml.parsers.DocumentBuilderFactory newInstance()><-javax.xml.parsers.DocumentBuilderFactory-><javax.xml.parsers.DocumentBuilderFactory: javax.xml.parsers.DocumentBuilder newDocumentBuilder()><-javax.xml.parsers.DocumentBuilder-><javax.xml.parsers.DocumentBuilder: org.w3c.dom.Document newDocument()>, sypet_clone_org.w3c.dom.Document, sypet_clone_java.lang.String, <org.w3c.dom.Document: org.w3c.dom.DocumentType getDoctype()>, <org.w3c.dom.Document: org.w3c.dom.DOMImplementation getImplementation()>, <org.w3c.dom.DOMImplementation: org.w3c.dom.Document createDocument(java.lang.String,java.lang.String,org.w3c.dom.DocumentType)>]
+     [java] Solution:
+     [java]  javax.xml.parsers.DocumentBuilderFactory sypet_var28764 = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+     [java]  javax.xml.parsers.DocumentBuilder sypet_var28765 = sypet_var28764.newDocumentBuilder();
+     [java]  org.w3c.dom.Document sypet_var28766 = sypet_var28765.newDocument();
+     [java]  org.w3c.dom.DocumentType sypet_var28767 = sypet_var28766.getDoctype();
+     [java]  org.w3c.dom.DOMImplementation sypet_var28768 = sypet_var28766.getImplementation();
+     [java]  org.w3c.dom.Document sypet_var28769 = sypet_var28768.createDocument(sypet_arg0,sypet_arg0,sypet_var28767);
+     [java]  return sypet_var28769;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 3 minutes 25 seconds

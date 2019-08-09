@@ -1,0 +1,85 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: true
+     [java] Including constraint: true
+     [java] Patterns Number: 10
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/16/benchmark16.json
+     [java] Benchmark Id: 16
+     [java] Method name: repalceWithRegex
+     [java] Packages: [java.util.regex]
+     [java] Libraries: [./lib/rt7.jar]
+     [java] Source type(s): [java.lang.String, java.lang.String, java.lang.String]
+     [java] Target type: java.lang.String
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.spec.DESKeySpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DESedeKeySpec is a phantom class!
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.spec.SecretKeySpec is a phantom class!
+     [java] Warning: javax.crypto.SecretKeyFactory is a phantom class!
+     [java] Warning: javax.crypto.spec.IvParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] Warning: javax.crypto.spec.PBEKeySpec is a phantom class!
+     [java] Warning: javax.crypto.Mac is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: sun.security.ssl.Krb5Helper is a phantom class!
+     [java] Warning: com.oracle.jrockit.jfr.FlightRecorder is a phantom class!
+     [java] Warning: sun.security.ssl.SSLSocketImpl is a phantom class!
+     [java] Warning: javax.crypto.CipherInputStream is a phantom class!
+     [java] Warning: javax.crypto.CipherOutputStream is a phantom class!
+     [java] Warning: sun.nio.cs.ext.EUC_TW$Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.EUC_TW$Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.DoubleByteEncoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0201$Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0201$Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0208_Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0208_Decoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0212_Encoder is a phantom class!
+     [java] Warning: sun.nio.cs.ext.JIS_X_0212_Decoder is a phantom class!
+     [java] Warning: javax.crypto.spec.PBEParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DHParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.DHPublicKeySpec is a phantom class!
+     [java] Warning: javax.crypto.interfaces.DHKey is a phantom class!
+     [java] Warning: javax.crypto.interfaces.DHPublicKey is a phantom class!
+     [java] Warning: javax.crypto.spec.OAEPParameterSpec is a phantom class!
+     [java] Warning: javax.crypto.spec.PSource is a phantom class!
+     [java] Warning: javax.crypto.spec.PSource$PSpecified is a phantom class!
+     [java] Warning: javax.crypto.KeyGenerator is a phantom class!
+     [java] #Classes: 5
+     [java] #Methods: 145
+     [java] PetriNet for path length: 1 [places: 14 ; transitions: 177 ; edges: 516]
+     [java] PetriNet for path length: 2 [places: 14 ; transitions: 177 ; edges: 516]
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 16
+     [java] Soot Time: 8284.189572
+     [java] Sketch Generation Time: 51.215859
+     [java] Sketch Completion Time: 52.938803
+     [java] Compilation Time: 1224.7329949999998
+     [java] Running Test cases Time: 4.4601299999999995
+     [java] Synthesis Time: 1333.3477869999997
+     [java] Total Time: 9617.537359
+     [java] Number of components: 1
+     [java] Number of holes: 6
+     [java] Number of completed programs: 11
+     [java] Number of sketches: 2
+     [java] current sketch:[<java.util.regex.Pattern: java.util.regex.Pattern compile(java.lang.String)><-java.util.regex.Pattern-><java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>Poly:(java.util.regex.Pattern java.lang.String )<-java.util.regex.Matcher-><java.util.regex.Matcher: java.lang.String replaceAll(java.lang.String)>]
+     [java] Solution:
+     [java]  java.util.regex.Pattern sypet_var10 = java.util.regex.Pattern.compile(sypet_arg1);
+     [java]  java.util.regex.Matcher sypet_var11 = sypet_var10.matcher(sypet_arg0);
+     [java]  java.lang.String sypet_var12 = sypet_var11.replaceAll(sypet_arg2);
+     [java]  return sypet_var12;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 11 seconds

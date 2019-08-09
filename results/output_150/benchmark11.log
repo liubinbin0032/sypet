@@ -1,0 +1,60 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: true
+     [java] Including constraint: true
+     [java] Patterns Number: 150
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/11/benchmark11.json
+     [java] Benchmark Id: 11
+     [java] Method name: dayOfWeek
+     [java] Packages: [org.joda.time]
+     [java] Libraries: [./lib/joda-time-2.8.2.jar]
+     [java] Source type(s): [java.lang.String, java.lang.String]
+     [java] Target type: java.lang.String
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] Warning: org.joda.convert.ToString is a phantom class!
+     [java] Warning: org.joda.convert.FromString is a phantom class!
+     [java] #Classes: 145
+     [java] #Methods: 3197
+     [java] PetriNet for path length: 1 [places: 178 ; transitions: 3546 ; edges: 9795]
+     [java] PetriNet for path length: 2 [places: 178 ; transitions: 3546 ; edges: 9795]
+     [java] PetriNet for path length: 3 [places: 178 ; transitions: 3546 ; edges: 9795]
+     [java] PetriNet for path length: 4 [places: 178 ; transitions: 3546 ; edges: 9795]
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 11
+     [java] Soot Time: 3120.263342
+     [java] Sketch Generation Time: 14632.372450000004
+     [java] Sketch Completion Time: 1087.3181580000014
+     [java] Compilation Time: 9167.652077000006
+     [java] Running Test cases Time: 356.00150900000006
+     [java] Synthesis Time: 25243.344194000012
+     [java] Total Time: 28363.607536000014
+     [java] Number of components: 3
+     [java] Number of holes: 6
+     [java] Number of completed programs: 894
+     [java] Number of sketches: 298
+     [java] current sketch:[<org.joda.time.format.DateTimeFormat: org.joda.time.format.DateTimeFormatter forPattern(java.lang.String)><-org.joda.time.format.DateTimeFormatter-><org.joda.time.DateTime: org.joda.time.DateTime parse(java.lang.String,org.joda.time.format.DateTimeFormatter)>, <org.joda.time.DateTime: org.joda.time.DateTime$Property dayOfWeek()>, <org.joda.time.field.AbstractReadableInstantFieldProperty: java.lang.String getAsText()>Poly:(org.joda.time.DateTime$Property )]
+     [java] Solution:
+     [java]  org.joda.time.format.DateTimeFormatter sypet_var1772 = org.joda.time.format.DateTimeFormat.forPattern(sypet_arg1);
+     [java]  org.joda.time.DateTime sypet_var1773 = org.joda.time.DateTime.parse(sypet_arg0,sypet_var1772);
+     [java]  org.joda.time.DateTime.Property sypet_var1774 = sypet_var1773.dayOfWeek();
+     [java]  java.lang.String sypet_var1775 = sypet_var1774.getAsText();
+     [java]  return sypet_var1775;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 36 seconds

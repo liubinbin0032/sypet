@@ -1,0 +1,62 @@
+Buildfile: /root/workspace/liubinbin/sypet_pattern/build.xml
+
+sypet:
+     [java] ----------Options
+     [java] Verbose: false
+     [java] Timeout: 1800000
+     [java] Round Robin: false
+     [java] Round Robin Iterations: 100
+     [java] Round Robin Range: 2
+     [java] Solver limit: 5
+     [java] Including patterns: true
+     [java] Including constraint: true
+     [java] Patterns Number: 80
+     [java] Handling with inheritage: true
+     [java] ----------benchmarks/patterns/1/benchmark1.json
+     [java] Benchmark Id: 1
+     [java] Method name: solveLinear
+     [java] Packages: [org.apache.commons.math3.linear]
+     [java] Libraries: [./lib/commons-math3-3.5.jar]
+     [java] Source type(s): [double[][], double[]]
+     [java] Target type: double[]
+     [java] --------------------------------------------------------
+     [java] Warning: javax.crypto.Cipher is a phantom class!
+     [java] Warning: javax.crypto.IllegalBlockSizeException is a phantom class!
+     [java] Warning: javax.crypto.BadPaddingException is a phantom class!
+     [java] Warning: javax.crypto.NoSuchPaddingException is a phantom class!
+     [java] Warning: javax.crypto.SecretKey is a phantom class!
+     [java] #Classes: 79
+     [java] #Methods: 1267
+     [java] PetriNet for path length: 1 [places: 119 ; transitions: 1642 ; edges: 4753]
+     [java] PetriNet for path length: 2 [places: 119 ; transitions: 1642 ; edges: 4753]
+     [java] PetriNet for path length: 3 [places: 119 ; transitions: 1642 ; edges: 4753]
+     [java] PetriNet for path length: 4 [places: 119 ; transitions: 1642 ; edges: 4753]
+     [java] PetriNet for path length: 5 [places: 119 ; transitions: 1642 ; edges: 4753]
+     [java] =========Statistics (time in milliseconds)=========
+     [java] Benchmark Id: 1
+     [java] Soot Time: 4616.993715
+     [java] Sketch Generation Time: 9657.485521000008
+     [java] Sketch Completion Time: 1699.0024609999973
+     [java] Compilation Time: 11810.378058999991
+     [java] Running Test cases Time: 21996.23712100001
+     [java] Synthesis Time: 45163.10316200001
+     [java] Total Time: 49780.096877
+     [java] Number of components: 4
+     [java] Number of holes: 9
+     [java] Number of completed programs: 1649
+     [java] Number of sketches: 777
+     [java] current sketch:[<org.apache.commons.math3.linear.MatrixUtils: org.apache.commons.math3.linear.RealMatrix createRealMatrix(double[][])>, <org.apache.commons.math3.linear.MatrixUtils: org.apache.commons.math3.linear.RealVector createRealVector(double[])>, <org.apache.commons.math3.linear.LUDecomposition: void <init>(org.apache.commons.math3.linear.RealMatrix)><-org.apache.commons.math3.linear.LUDecomposition-><org.apache.commons.math3.linear.LUDecomposition: org.apache.commons.math3.linear.DecompositionSolver getSolver()><-org.apache.commons.math3.linear.DecompositionSolver-><org.apache.commons.math3.linear.DecompositionSolver: org.apache.commons.math3.linear.RealVector solve(org.apache.commons.math3.linear.RealVector)>, <org.apache.commons.math3.linear.ArrayRealVector: void <init>(org.apache.commons.math3.linear.RealVector)><-org.apache.commons.math3.linear.ArrayRealVector-><org.apache.commons.math3.linear.ArrayRealVector: double[] getDataRef()>]
+     [java] Solution:
+     [java]  org.apache.commons.math3.linear.RealMatrix sypet_var5171 = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(sypet_arg0);
+     [java]  org.apache.commons.math3.linear.RealVector sypet_var5172 = org.apache.commons.math3.linear.MatrixUtils.createRealVector(sypet_arg1);
+     [java]  org.apache.commons.math3.linear.LUDecomposition sypet_var5173 = new org.apache.commons.math3.linear.LUDecomposition(sypet_var5171);
+     [java]  org.apache.commons.math3.linear.DecompositionSolver sypet_var5174 = sypet_var5173.getSolver();
+     [java]  org.apache.commons.math3.linear.RealVector sypet_var5175 = sypet_var5174.solve(sypet_var5172);
+     [java]  org.apache.commons.math3.linear.ArrayRealVector sypet_var5176 = new org.apache.commons.math3.linear.ArrayRealVector(sypet_var5175);
+     [java]  double[] sypet_var5177 = sypet_var5176.getDataRef();
+     [java]  return sypet_var5177;
+     [java]  
+     [java] ============================
+
+BUILD SUCCESSFUL
+Total time: 1 minute 3 seconds

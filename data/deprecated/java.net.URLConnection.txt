@@ -1,2 +1,0 @@
-URLConnection.setDefaultRequestProperty(String,String)
-URLConnection.getDefaultRequestProperty(String)
