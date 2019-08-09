@@ -1,0 +1,24 @@
+{
+  "id": 17,
+  "description": "Cast a string to a sql time",
+  "methodName": "string2Time",
+  "paramNames": [
+    "sypet_arg0",
+	"sypet_arg1"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+	  "java.lang.String"
+  ],
+  "tgtType": "java.sql.Time",
+  "packages": [
+    "java.text.SimpleDateFormat",
+    "java.text.DateFormat",
+    "java.util.Date",
+	  "java.sql"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/17/TestSource.java"
+}

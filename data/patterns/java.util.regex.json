@@ -1,0 +1,20 @@
+{
+	"patterns": [
+		"java.util.regex.Pattern.compile, java.util.regex.Pattern.matcher, java.util.regex.Matcher.find, java.util.regex.Matcher.group",
+		"java.util.regex.Pattern.compile, java.util.regex.Pattern.matcher, java.util.regex.Matcher.replaceAll",
+		"java.util.regex.Pattern.compile, java.util.regex.Pattern.matcher, java.util.regex.Matcher.find, java.util.regex.Matcher.start, java.util.regex.Matcher.end",
+		"java.util.regex.Pattern.matcher, java.util.regex.Matcher.lookingAt, java.util.regex.Matcher.end",
+		"java.util.regex.Matcher.reset, java.util.regex.Matcher.matches",
+		"java.util.regex.Matcher.groupCount, java.util.regex.Matcher.group",
+		"java.util.regex.Pattern.matcher, java.util.regex.Matcher.lookingAt, java.util.regex.Matcher.group",
+		"java.util.regex.Pattern.compile, java.util.regex.Pattern.matcher, java.util.regex.Matcher.matches, java.util.regex.Matcher.group",
+		"java.util.regex.MatchResult.groupCount, java.util.regex.MatchResult.group",
+		"java.util.regex.Pattern.matcher, java.util.regex.Matcher.find, java.util.regex.Matcher.start, java.util.regex.Matcher.end, java.util.regex.Pattern.compile",
+		"java.util.regex.Matcher.find, java.util.regex.Matcher.groupCount",
+		"java.util.regex.Pattern.compile, java.util.regex.Matcher.find, java.util.regex.Matcher.group, java.util.regex.Matcher.appendReplacement, java.util.regex.Matcher.appendTail",
+		"java.util.regex.Matcher.find, java.util.regex.Matcher.replaceFirst",
+		"java.util.regex.Matcher.find, java.util.regex.Matcher.group, java.util.regex.Matcher.quoteReplacement, java.util.regex.Matcher.appendReplacement, java.util.regex.Matcher.appendTail",
+		"java.util.regex.Matcher.group, java.util.regex.Matcher.replaceFirst",
+		"java.util.regex.Matcher.start, java.util.regex.Matcher.group"
+	]
+}

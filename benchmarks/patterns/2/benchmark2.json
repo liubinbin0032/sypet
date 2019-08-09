@@ -1,0 +1,19 @@
+{
+  "id": 2,
+  "description": "Compute the pseudo inverse of a matrix using QR Decomposition",
+  "methodName": "invert",
+  "paramNames": [
+    "sypet_arg0"
+  ],
+  "srcTypes": [
+    "double[][]"
+  ],
+  "tgtType": "double[][]",
+  "packages": [
+    "org.apache.commons.math3.linear"
+  ],
+  "libs": [
+    "./lib/commons-math3-3.5.jar"
+  ],
+  "testPath": "benchmarks/patterns/2/TestSource.java"
+}

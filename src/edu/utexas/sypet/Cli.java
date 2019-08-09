@@ -25,8 +25,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import edu.utexas.sypet.synthesis.sat4j.PetrinetEncoding.Option;
-
 public class Cli {
 	private static final Logger log = Logger.getLogger(Cli.class.getName());
 	private String[] args = null;
@@ -40,6 +38,10 @@ public class Cli {
 	int roundRobinRange;
 	boolean roundRobinFlag;
 	int solverLimit;
+	boolean pattern;
+	boolean constraint;
+	int pattern_num;
+	boolean inheri;
 
 	public Cli(String[] args) {
 
@@ -53,14 +55,21 @@ public class Cli {
 		options.addOption("rrange", "robinRange", true, "Round robin range.");
 		options.addOption("r", "robin", false, "Round robin.");
 		options.addOption("slimit","solverlimit",true,"Maximum number of optimization iterations.");
-		
+		options.addOption("ptn", "pattern", false, "Handling Pattern.");
+		options.addOption("cons", "constraint", false, "Including Constraint.");
+		options.addOption("pn", "pattern_num", true, "Patterns Number.");
+		options.addOption("inheri", "inheri", false, "Handling Inheritage.");
 
 		verbose = false;
-		timeout = 600000;
+		timeout = 1800000;
 		roundRobinIterationsLimit = 100;
 		roundRobinRange = 2;
-		roundRobinFlag = true;
+		roundRobinFlag = false;
 		solverLimit = 5;
+		pattern = false;
+		constraint = false;
+		pattern_num = 40;
+		inheri = true;
 
 	}
 	
@@ -92,6 +101,22 @@ public class Cli {
 		return roundRobinFlag;
 	}
 	
+	public boolean getPattern() {
+		return pattern;
+	}
+	
+	public boolean getConstraint() {
+		return constraint;
+	}
+	
+	public int getPatternNum() {
+		return pattern_num;
+	}
+	
+	public boolean getInheri() {
+		return inheri;
+	}
+	
 	public void printOptions() {
 		System.out.println("----------Options");
 		System.out.println("Verbose: " + verbose);
@@ -100,6 +125,10 @@ public class Cli {
 		System.out.println("Round Robin Iterations: " + roundRobinIterationsLimit);
 		System.out.println("Round Robin Range: " + roundRobinRange);
 		System.out.println("Solver limit: " + solverLimit);
+		System.out.println("Including patterns: " + pattern);
+		System.out.println("Including constraint: " + constraint);
+		System.out.println("Patterns Number: " + pattern_num);
+		System.out.println("Handling with inheritage: " + inheri);
 	}
 
 	public void parse() {
@@ -138,6 +167,16 @@ public class Cli {
 			}
 			
 			roundRobinFlag = cmd.hasOption("r");
+			
+			pattern = cmd.hasOption("ptn");
+			
+			constraint = cmd.hasOption("cons");
+			
+//			inheri = cmd.hasOption("inheri");
+			
+			if(cmd.hasOption("pn")) {
+				pattern_num = Integer.valueOf(cmd.getOptionValue("pn"));
+			}
 
 		} catch (ParseException e) {
 			log.log(Level.SEVERE, "Failed to parse comand line properties", e);

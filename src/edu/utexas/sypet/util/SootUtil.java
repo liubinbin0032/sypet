@@ -18,13 +18,16 @@ package edu.utexas.sypet.util;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -45,6 +48,7 @@ import soot.SootField;
 import soot.SootMethod;
 import soot.SourceLocator;
 import soot.Type;
+import uniol.apt.adt.exception.NoSuchEdgeException;
 import uniol.apt.adt.pn.Flow;
 import uniol.apt.adt.pn.PetriNet;
 import uniol.apt.adt.pn.Place;
@@ -82,6 +86,11 @@ public class SootUtil {
 	private static final String UPPER = "_upper";
 
 	private static Config cfg;
+	
+	public static Set<String> patternSet = new LinkedHashSet<>();
+	public static Set<String> deprecatedSet = new HashSet<>();
+	public static Map<String, List<String>> superDict = new HashMap<>();
+	public static Map<String, List<String>> subDict = new HashMap<>();
 
 	public static void initCfg() {
 		try {
@@ -367,7 +376,7 @@ public class SootUtil {
 	}
 
 	// package of certain jar.
-	public static void processJar(String jarPath, Set<String> pkg, PetriNet p) {
+	public static void processJar(String jarPath, Set<String> pkg, PetriNet p, Map<String, Set<String>> superClassMap) {
 		pkg.addAll(getBuildinPkg());
 		createPlace(p, "void");
 		Set<SootClass> linkedlists = new HashSet<>();
@@ -384,6 +393,13 @@ public class SootUtil {
 			if (skip)
 				continue;
 
+			if (!clazz.isPublic()) {
+				continue;
+			}
+			
+			if (clazz.toString().contains("java.awt.geom.Path2D"))
+				continue;
+			
 			classNum++;
 			if (isLinkedlist(clazz)) {
 				linkedlists.add(clazz);
@@ -391,6 +407,18 @@ public class SootUtil {
 
 			LinkedList<SootMethod> methodsCopy = new LinkedList<SootMethod>(clazz.getMethods());
 			for (SootMethod meth : methodsCopy) {
+				
+				if (clazz.isAbstract() && meth.getName().equals("<init>")) {
+//					System.out.println("abstract: "+meth );
+					continue;
+				}
+				
+				
+				String formMethod = getMethodForm(meth.toString());
+				if (deprecatedSet.contains(formMethod)) {
+//					System.out.println("deprecated " + formMethod);
+					continue;
+				}
 
 				methodNum++;
 				if (!isValidMeth(meth))
@@ -444,6 +472,7 @@ public class SootUtil {
 
 		}
 
+		getPolymorphismInformation(p, superClassMap);
 		createLinkedlistTransition(p, linkedlists);
 	}
 
@@ -604,5 +633,414 @@ public class SootUtil {
 
 		Set<String> mySet = new HashSet<>(cfg.getBuildinPkg());
 		return mySet;
+	}
+	
+	public static void handlePattern(PetriNet p, List<String> ptnList) {
+		
+		for (String pattern : ptnList) {
+			ArrayList<String> seqList = new ArrayList<>(Arrays.asList(pattern.split(", ")));
+			// System.out.println(seqList.size());
+			
+			ArrayList<ArrayList<String>> transGroupList = new ArrayList<>();
+ 			for (String seq : seqList) {
+ 				ArrayList<String> transGroup = new ArrayList<>();
+ 				for (Transition t : p.getTransitions()) {
+ 					if (patternSet.contains(t.getId()))
+ 						continue;
+ 					String class_name = seq.substring(0, seq.lastIndexOf("."));
+ 					String method_name = seq.substring(seq.lastIndexOf(".")+1);
+ 					if (t.getId().contains(class_name) && t.getId().contains(method_name + "(")) {
+						transGroup.add(t.getId());
+					}
+ 				}
+ 				transGroupList.add(transGroup);
+			}
+ 			// System.out.println(transGroupList.size());
+
+ 			// create short path for each 2 transitions
+ 			for (int i = 0; i < transGroupList.size(); i++) 
+ 				for (int j = i+1; j < transGroupList.size(); j++) 
+ 					for (String trans1 : transGroupList.get(i)) 
+ 	 					for (String trans2: transGroupList.get(j)) {
+ 	 						Transition t1 = p.getTransition(trans1);		
+ 	 						Transition t2 = p.getTransition(trans2);
+ 	 						
+ 	 						Set<Place> t2prePlaces = t2.getPreset();
+ 	 						Place t1post = t1.getPostset().iterator().next();
+ 	 						if (t2prePlaces.contains(t1post)) {
+ 	 							Experiment.pathList.add(pattern);
+ 	 							if (Experiment.PATTERN)
+ 	 								createPattern2(p, trans1, trans2);
+ 	 						}
+ 	 					}
+
+ 			// create short path for each 3 transitions
+ 			if (transGroupList.size() > 2) 
+	 			for (int i = 0; i < transGroupList.size(); i++) 
+	 				for (int j = i+1; j < transGroupList.size(); j++) 
+	 					for (int k = j+1; k < transGroupList.size(); k++) 
+	 						for (String trans1 : transGroupList.get(i)) 
+		 	 					for (String trans2: transGroupList.get(j)) 
+		 	 						for (String trans3: transGroupList.get(k)) {
+		 	 							Transition t1 = p.getTransition(trans1);		
+		 	 							Transition t2 = p.getTransition(trans2);
+		 	 							Transition t3 = p.getTransition(trans3);
+		 	 							
+		 	 							Set<Place> t2prePlaces = t2.getPreset();
+		 	 							Place t1post = t1.getPostset().iterator().next();
+		 	 							
+		 	 							Set<Place> t3prePlaces = t3.getPreset();
+		 	 							Place t2post = t2.getPostset().iterator().next();
+		 	 							
+		 	 							if (t2prePlaces.contains(t1post) && t3prePlaces.contains(t2post)) {
+		 	 								if (Experiment.PATTERN)
+		 	 									createPattern3(p, trans1, trans2, trans3);	
+		 	 							}
+		 	 						}				
+		}
+
+		List<String> consList = new ArrayList<>();
+		for (String pattern : Experiment.ptnList) {
+			if (Experiment.pathList.contains(pattern))
+				continue;
+			
+			boolean flag = false;
+			for (String item : consList) {
+				if (Arrays.asList(item.split(", ")).containsAll(Arrays.asList(pattern.split(", ")))) {
+					flag = true;
+					break;
+				} else if (Arrays.asList(pattern.split(", ")).containsAll(Arrays.asList(item.split(", "))))
+					consList.remove(item);
+			}
+			
+			if (flag)
+				continue;
+
+			consList.add(pattern);
+		}
+		Experiment.consList = consList;
+	}
+	
+	public static boolean createPattern2(PetriNet p, String trans1, String trans2) {
+		Transition t1 = p.getTransition(trans1);		
+		Transition t2 = p.getTransition(trans2);
+		
+		Set<Place> t2prePlaces = t2.getPreset();
+		Iterator<Place> it2 = t2prePlaces.iterator();
+		Place t1post = t1.getPostset().iterator().next();
+
+		String seqName = t1.getId() + "<-" + t1post.getId() + "->" + t2.getId();
+		if (p.containsTransition(seqName))
+			return false;
+		createTransition(p, seqName);
+		
+		Set<Place> t1prePlaces = t1.getPreset();
+		Iterator<Place> it1 = t1prePlaces.iterator();
+		// connect t1pre to seq
+		while (it1.hasNext()) {
+			Place t1pre = it1.next();
+			int weight = p.getFlow(t1pre.getId(), t1.getId()).getWeight();
+			addFlow(p, t1pre.getId(), seqName, weight);
+		}
+		
+		// connect t2pre to seq
+		while (it2.hasNext()) {
+			Place t2pre = it2.next();
+			// t2pre in t1prePlaces
+			if (t1prePlaces.contains(t2pre)) {
+				int weight = p.getFlow(t2pre.getId(), t2.getId()).getWeight();
+				if (t1post.equals(t2pre))
+					addFlow(p, t2pre.getId(), seqName, weight - 1);
+				else
+					addFlow(p, t2pre.getId(), seqName, weight);
+			} else {
+				if (t2pre.equals(t1post)) {
+					int weight = p.getFlow(t2pre.getId(), t2.getId()).getWeight();
+					if (weight == 1)
+						continue;
+					addFlow(p, t2pre.getId(), seqName, weight - 1);
+				} else {
+					int weight = p.getFlow(t2pre.getId(), t2.getId()).getWeight();
+					addFlow(p, t2pre.getId(), seqName, weight);
+				}
+			}
+		}
+		Place t2post = t2.getPostset().iterator().next();
+		addFlow(p, seqName, t2post.getId(), 1);
+		patternSet.add(seqName);
+		return true;
+	}
+	
+	public static boolean createPattern3(PetriNet p, String trans1, String trans2, String trans3) {
+		Transition t1 = p.getTransition(trans1);		
+		Transition t2 = p.getTransition(trans2);
+		Transition t3 = p.getTransition(trans3);
+		
+		Set<Place> t2prePlaces = t2.getPreset();
+		Iterator<Place> it2 = t2prePlaces.iterator();
+		Place t1post = t1.getPostset().iterator().next();
+		
+		Set<Place> t3prePlaces = t3.getPreset();
+		Iterator<Place> it3 = t3prePlaces.iterator();
+		Place t2post = t2.getPostset().iterator().next();
+		
+		String seqName = t1.getId() + "<-" + t1post.getId() + "->" + t2.getId() + "<-" + t2post.getId() + "->" + t3.getId();
+		if (p.containsTransition(seqName))
+			return false;
+		createTransition(p, seqName);
+		
+		Set<Place> t1prePlaces = t1.getPreset();
+		Iterator<Place> it1 = t1prePlaces.iterator();
+		while (it1.hasNext()) {
+			Place t1pre = it1.next();		
+			int weight = p.getFlow(t1pre.getId(), t1.getId()).getWeight();
+			addFlow(p, t1pre.getId(), seqName, weight);
+		}
+		
+		while (it2.hasNext()) {
+			Place t2pre = it2.next();
+			// t2pre in t1prePlaces
+			if (t1prePlaces.contains(t2pre)) {
+				int weight = p.getFlow(t2pre.getId(), t2.getId()).getWeight();
+				if (t1post.equals(t2pre))
+					addFlow(p, t2pre.getId(), seqName, weight - 1);
+				else
+					addFlow(p, t2pre.getId(), seqName, weight);
+			} else {
+				if (t1post.equals(t2pre)) {
+					int weight = p.getFlow(t2pre.getId(), t2.getId()).getWeight();
+					if ( weight == 1)
+						continue;
+					addFlow(p, t2pre.getId(), seqName, weight - 1);
+				} else {
+					int weight = p.getFlow(t2pre.getId(), t2.getId()).getWeight();
+					addFlow(p, t2pre.getId(), seqName, weight);	
+				}
+			}
+		}
+
+		while (it3.hasNext()) {
+			Place t3pre = it3.next();
+			if (t1prePlaces.contains(t3pre)) {
+				int weight = p.getFlow(t3pre.getId(), t3.getId()).getWeight();
+				if (t2post.equals(t3pre))
+					addFlow(p, t3pre.getId(), seqName, weight - 1);
+				else
+					addFlow(p, t3pre.getId(), seqName, weight);
+			} else if (t2prePlaces.contains(t3pre)) {
+				int weight = p.getFlow(t3pre.getId(), t3.getId()).getWeight();
+				if (t2post.equals(t3pre))
+					addFlow(p, t3pre.getId(), seqName, weight - 1);
+				else
+					addFlow(p, t3pre.getId(), seqName, weight);
+			} else {	
+				if (t3pre.equals(t2post)) {
+					int weight = p.getFlow(t3pre.getId(), t3.getId()).getWeight();
+					if ( weight == 1 )
+						continue;
+					addFlow(p, t3pre.getId(), seqName, weight - 1);
+				} else {
+					int weight = p.getFlow(t3pre.getId(), t3.getId()).getWeight();
+					addFlow(p, t3pre.getId(), seqName, weight);	
+				}
+			}
+		}
+		Place t3post = t3.getPostset().iterator().next();
+		addFlow(p, seqName, t3post.getId(), 1);
+		// System.out.println("pattern: " + seqName);
+		patternSet.add(seqName);	
+		return true;
+	}
+	
+	public static void addFlow(PetriNet petrinet, String ID1, String ID2, int weight) {
+		Flow f;
+		try {
+			f = petrinet.getFlow(ID1, ID2);
+			f.setWeight(f.getWeight() + weight);
+		} catch (NoSuchEdgeException e) {
+			petrinet.createFlow(ID1, ID2, weight);
+		}
+	}
+	
+	public static String getMethodForm(String signature) {
+		String className = signature.substring(1, signature.indexOf(":"));
+		className = className.substring(className.lastIndexOf(".")+1, className.length());
+		String methodName = signature.substring(signature.indexOf(":")+2, signature.indexOf("("));
+		methodName = methodName.substring(methodName.indexOf(" ")+1, methodName.length());
+		String paraName = signature.substring(signature.indexOf("(")+1, signature.indexOf(")"));
+		String paraNew = "";
+		if (paraName.contains(",")) {
+			for (String para: paraName.split(",")) {
+				para = para.substring(para.lastIndexOf(".")+1, para.length());
+				paraNew = paraNew.concat(para).concat(",");
+			}
+			paraNew = paraNew.substring(0, paraNew.length()-1);
+		}
+		else 
+			paraNew = paraName.substring(paraName.lastIndexOf(".")+1, paraName.length());
+		String name = className + "." + methodName + "(" + paraNew + ")";
+		return name;
+	}
+	
+	public static void copyPolymorphism(PetriNet petrinet) {
+		// Handles polymorphism by creating copies for each method that has superclass as input type
+		for (Transition t : petrinet.getTransitions()) {
+			if (!t.getId().contains("<") || t.getId().contains("sypet_clone"))
+				continue;
+			
+			String transName = t.getId();
+//			System.out.println("Trans " + transName);
+			String delClass = transName.substring(1, transName.indexOf(":"));
+			String paraList = transName.substring(transName.indexOf("(") + 1, (transName.indexOf(")")));
+			
+			List<Place> inputs = new ArrayList<>();
+			Set<Flow> inEdges = t.getPresetEdges();
+			for (Flow f : inEdges) {
+				if (f.getPlace().getId().equals(delClass)) {							
+					inputs.add(f.getPlace());
+//					System.out.println("Place" + f.getPlace());
+					break;
+				}
+			}
+			if (!paraList.equals("")) {
+				for (String para : paraList.split(",")) {
+					for (Flow f : inEdges) {
+						if (f.getPlace().getId().equals(para)) {	
+							inputs.add(f.getPlace());
+//							System.out.println("Place" + f.getPlace());
+						}
+					}
+				}
+			}
+			
+			Stack<Place> polyInputs = new Stack<>();
+			generatePolymophism(petrinet, t, 0, inputs, polyInputs);
+		}
+	}
+	
+	private static void generatePolymophism(PetriNet petrinet, Transition t, int count, List<Place> inputs, Stack<Place> polyInputs) {
+		if (inputs.size() == count) {
+			boolean skip = true;
+			for (int i = 0; i < inputs.size(); i++) {
+				if (!inputs.get(i).equals(polyInputs.get(i))) {
+					skip = false;
+				}
+			}
+			if (skip)
+				return;
+
+			String newTransitionName = t.getId() + "Poly:(";
+			for (Place p : polyInputs) {
+				newTransitionName += p.getId() + " ";
+			}
+			newTransitionName += ")";
+
+			if (petrinet.containsTransition(newTransitionName)) {
+				return;
+			}
+
+			boolean polymorphicOutput = false;
+			for (Flow f : t.getPostsetEdges()) {
+				Place p = f.getPlace();
+				List<String> subClasses = superDict.get(p.getId());
+				if (subClasses != null){
+					polymorphicOutput = true;
+					break;
+				}
+				if (polymorphicOutput)
+					break;
+			}
+
+			Transition newTransition = petrinet.createTransition(newTransitionName);
+			for (Place p : polyInputs) {
+				// NOTE: why is the weight of the flow restricted to 1?
+				addFlow(petrinet, p.getId(), newTransitionName, 1);
+			}
+
+			for (Flow f : t.getPostsetEdges()) {
+				Place p = f.getPlace();
+				int w = f.getWeight();
+				petrinet.createFlow(newTransition, p, w);
+			}
+			//System.out.println(newTransitionName);
+			polyMap.put(newTransitionName, t.getId());
+
+			if (polymorphicOutput){
+
+				for (Flow f : t.getPostsetEdges()) {
+					Place p = f.getPlace();
+					List<String> subClasses = superDict.get(p.getId());
+					for (String s : subClasses) {
+						if (!petrinet.containsPlace(s))
+							continue;
+						String newPolyTransitionName = newTransitionName+"(" + s + ")";
+						assert (!petrinet.containsTransition(newPolyTransitionName));
+						newTransition = petrinet.createTransition(newPolyTransitionName);
+						for (Place p2 : polyInputs) {
+							addFlow(petrinet, p2.getId(), newPolyTransitionName, 1);
+						}
+						int w = f.getWeight();
+						petrinet.createFlow(newTransition, petrinet.getPlace(s), w);
+//						System.out.println(newPolyTransitionName);
+						polyMap.put(newPolyTransitionName, t.getId());
+					}
+				}
+
+			}
+
+		} else {
+			Place p = inputs.get(count);
+			List<String> subClasses = subDict.get(p.getId());
+			if (subClasses == null) { // No possible polymophism
+				polyInputs.push(p);
+				generatePolymophism(petrinet, t, count + 1, inputs, polyInputs);
+				polyInputs.pop();
+				return;
+			} else {
+				for (String subclass : subClasses) {
+					createPlace(petrinet, subclass);			
+//					addPlace(subclass);
+					Place polyClass = petrinet.getPlace(subclass);
+					polyInputs.push(polyClass);
+					generatePolymophism(petrinet, t, count + 1, inputs, polyInputs);
+					polyInputs.pop();
+				}
+				return;
+			}
+		}
+	}
+	
+	private static void getPolymorphismInformation(PetriNet petrinet, Map<String, Set<String>> superClassMap) {
+		
+		Map<String, Set<String>> subClassMap = new HashMap<>();
+		for (String key : superClassMap.keySet()) {
+			for (String value : superClassMap.get(key)) {
+				if (!subClassMap.containsKey(value)) {
+					subClassMap.put(value, new HashSet<String>());
+				}
+				subClassMap.get(value).add(key);
+			}
+		}
+		
+		for (String s : superClassMap.keySet()) {
+			if (!petrinet.containsPlace(s))
+				continue;
+
+			Set<String> superClasses = superClassMap.get(s);
+			if (superClasses.size() != 0) {
+				List<String> superClassList = new ArrayList<>(superClasses);
+				superDict.put(s, superClassList);
+			}
+		}
+		for (String s : subClassMap.keySet()) {
+			if (!petrinet.containsPlace(s))
+				continue;
+			
+			Set<String> subClasses = subClassMap.get(s);
+			if (subClasses.size() != 0) {
+				List<String> subClassList = new ArrayList<>(subClasses);
+				subDict.put(s, subClassList);
+			}
+		}
 	}
 }

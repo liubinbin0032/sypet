@@ -1,0 +1,7 @@
+PolygonsSet.PolygonsSet()
+PolygonsSet.PolygonsSet(BSPTree)
+PolygonsSet.PolygonsSet(Collection)
+PolygonsSet.PolygonsSet(double,double,double,double)
+SubLine.SubLine(Vector2D,Vector2D)
+Line.Line(Vector2D,Vector2D)
+Line.Line(Vector2D,double)

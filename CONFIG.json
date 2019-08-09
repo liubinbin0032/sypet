@@ -21,7 +21,11 @@
 	    "org.joda.time.DateTime,org.joda.time.base.AbstractDateTime",
 	    "org.w3c.dom.Document,java.lang.Object",
 	    "org.joda.time.DateTime$Property,org.joda.time.field.AbstractReadableInstantFieldProperty",
-	    "org.apache.commons.math.linear.SingularValueDecompositionImpl,org.apache.commons.math.linear.SingularValueDecomposition"
+	    "org.apache.commons.math.linear.SingularValueDecompositionImpl,org.apache.commons.math.linear.SingularValueDecomposition",
+	    "java.text.SimpleDateFormat,java.text.DateFormat",
+	    "java.io.FileReader,java.io.Reader",
+	    "java.io.InputStreamReader,java.io.Reader",
+	    "java.lang.String,java.lang.CharSequence"
 	],
 	
 	"buildinPkg": [

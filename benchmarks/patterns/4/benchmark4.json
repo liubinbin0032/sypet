@@ -1,0 +1,24 @@
+{
+  "id": 4,
+  "description": "Rotate two dimensional geometry object by the specified angle about a point",
+  "methodName": "rotate",
+    "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1",
+    "sypet_arg2"
+  ],
+
+  "srcTypes": [
+    "java.awt.geom.Area",
+    "java.awt.geom.Point2D",
+    "double"
+  ],
+  "tgtType": "java.awt.geom.Area",
+  "packages": [
+    "java.awt.geom"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/4/TestSource.java"
+}

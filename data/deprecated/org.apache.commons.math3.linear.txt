@@ -1,0 +1,8 @@
+FieldVector.getData()
+EigenDecomposition.EigenDecomposition(RealMatrix,double)
+EigenDecomposition.EigenDecomposition(double[],double[],double)
+OpenMapRealVector.dotProduct(OpenMapRealVector)
+ArrayFieldVector.ArrayFieldVector(ArrayFieldVector,ArrayFieldVector)
+ArrayFieldVector.ArrayFieldVector(ArrayFieldVector,FieldElement[])
+ArrayFieldVector.ArrayFieldVector(FieldElement[],ArrayFieldVector)
+SparseFieldVector.getData()

@@ -141,106 +141,8 @@ public class Sketcher {
 		}
 
 
-		for (String methStr : templates) {
-			boolean poly = false;
-			String polyType = "";
-			
-			if(SootUtil.llTransitions.containsKey(methStr)) {
-				//linkedlist transition.
-				Pent<String, String, String, String,String> trio = SootUtil.llTransitions.get(methStr);
-				String src = trio.val0;
-				String tgt = trio.val1;
-				List<String> paramList = new ArrayList<>();
-				paramList.add(src);
-				
-				Statement s2 = sf.getStmt(methStr, tgt, paramList);
-				s2.setStatic(false);
-				s2.setClazz(src);
-				s2.setSootMethod(methStr);
-				DefVar dv2 = vf.getDefVar(s2.getRetType());
-				s2.setLhs(dv2);
-				stmts.add(s2);
-				System.out.println("manually handle llTransition: ");
-				continue;
-			}
-			
-			if(SootUtil.BinTransitions.containsKey(methStr)) {
-				//BinaryTree transition.
-				Pair<BinTree, BinTree> trio = SootUtil.BinTransitions.get(methStr);
-				BinTree src = trio.val0;
-				BinTree tgt = trio.val1;
-				List<String> paramList = new ArrayList<>();
-				paramList.add(src.getType());
-				
-				Statement s2 = sf.getStmt(methStr, tgt.getType(), paramList);
-				s2.setStatic(false);
-				s2.setClazz(src.getType());
-				s2.setSootMethod(methStr);
-				DefVar dv2 = vf.getDefVar(s2.getRetType());
-				s2.setLhs(dv2);
-				stmts.add(s2);
-				System.out.println("manually handle binTransition: ");
-				continue;
-			}
-			
-			//handle JDK.json
-			if(methStr.contains("_sdk") || methStr.contains("_upper")) {
-				Pair<String,String> stPair = SyPetService.sdkTypes.get(methStr);
-				assert stPair != null;
-				List<String> paramList = new ArrayList<>();
-				paramList.add(stPair.val0);
-				
-				Statement s2 = sf.getStmt(methStr, stPair.val1, paramList);
-				s2.setStatic(false);
-				s2.setClazz(stPair.val0);
-				s2.setSootMethod(methStr);
-				DefVar dv2 = vf.getDefVar(s2.getRetType());
-				s2.setLhs(dv2);
-				stmts.add(s2);
-				continue;
-			}
-			
-			//hunter method.
-			if (SootUtil.isHunterMethod(methStr)) {
-				CustomMethod hunterMeth = SootUtil.getHunterMethod(methStr);
-				this.handleHunterMethod(hunterMeth, sf, vf);
-				continue;
-			}
-			
-			assert Scene.v().containsMethod(methStr) : methStr;
-			SootMethod meth = Scene.v().getMethod(methStr);
-			String name = meth.getName();
-			String declClazz = meth.getDeclaringClass().getName();
-
-			String ret = meth.getReturnType().toString();
-			// constructor
-			if (meth.isConstructor()) {
-				name = "new " + declClazz;
-				ret = declClazz;
-			}
-			List<String> paramList = new ArrayList<>();
-			if (!meth.isStatic() && !meth.isConstructor()) {
-				String recv = meth.getDeclaringClass().getName();
-				
-				paramList.add(recv);
-			}
-			for (Type t : meth.getParameterTypes()) {
-				String str = t.toString();
-				
-				if(poly) str = polyType;
-
-				paramList.add(str);
-			}
-
-			Statement s2 = sf.getStmt(name, ret, paramList);
-			s2.setStatic(meth.isStatic());
-			s2.setClazz(declClazz);
-			s2.setSootMethod(meth.getSignature());
-			DefVar dv2 = vf.getDefVar(s2.getRetType());
-			s2.setLhs(dv2);
-			stmts.add(s2);
-//			System.out.println(s2 + " args: " + s2.getArgTypes() + " ret:" + s2.getRetType() + " Holes:" + s2.getArgHoles());
-		}
+		for (String methStr : templates) 
+			regularStmt(vf, sf, empty, methStr);
 		
 		//create return stmt.
 		List<String> retList = new ArrayList<>();
@@ -321,5 +223,169 @@ public class Sketcher {
 		DefVar dv2 = vf.getDefVar(s2.getRetType());
 		s2.setLhs(dv2);
 		stmts.add(s2);
+	}
+	
+	public boolean regularStmt(DefVarFactory vf, StmtFactory sf, List<String> empty, String methStr) {
+		boolean poly = false;
+		String polyType = "";
+		if (SootUtil.llTransitions.containsKey(methStr)) {
+			//linkedlist transition.
+			Pent<String, String, String, String,String> trio = SootUtil.llTransitions.get(methStr);
+			String src = trio.val0;
+			String tgt = trio.val1;
+			List<String> paramList = new ArrayList<>();
+			paramList.add(src);
+			
+			Statement s2 = sf.getStmt(methStr, tgt, paramList);
+			s2.setStatic(false);
+			s2.setClazz(src);
+			s2.setSootMethod(methStr);
+			DefVar dv2 = vf.getDefVar(s2.getRetType());
+			s2.setLhs(dv2);
+			stmts.add(s2);
+			// System.out.println("manually handle llTransition: ");
+			return true;
+		}
+		
+		if (SootUtil.BinTransitions.containsKey(methStr)) {
+			//BinaryTree transition.
+			Pair<BinTree, BinTree> trio = SootUtil.BinTransitions.get(methStr);
+			BinTree src = trio.val0;
+			BinTree tgt = trio.val1;
+			List<String> paramList = new ArrayList<>();
+			paramList.add(src.getType());
+			
+			Statement s2 = sf.getStmt(methStr, tgt.getType(), paramList);
+			s2.setStatic(false);
+			s2.setClazz(src.getType());
+			s2.setSootMethod(methStr);
+			DefVar dv2 = vf.getDefVar(s2.getRetType());
+			s2.setLhs(dv2);
+			stmts.add(s2);
+			// System.out.println("manually handle binTransition: ");
+			return true;
+		}
+		
+		//handle JDK.json
+		if (methStr.contains("_sdk") || methStr.contains("_upper")) {
+			Pair<String,String> stPair = SyPetService.sdkTypes.get(methStr);
+			assert stPair != null;
+			List<String> paramList = new ArrayList<>();
+			paramList.add(stPair.val0);
+			
+			Statement s2 = sf.getStmt(methStr, stPair.val1, paramList);
+			s2.setStatic(false);
+			s2.setClazz(stPair.val0);
+			s2.setSootMethod(methStr);
+			DefVar dv2 = vf.getDefVar(s2.getRetType());
+			s2.setLhs(dv2);
+			stmts.add(s2);
+			return true;
+		}
+		
+		//hunter method.
+		if (SootUtil.isHunterMethod(methStr)) {
+			CustomMethod hunterMeth = SootUtil.getHunterMethod(methStr);
+			this.handleHunterMethod(hunterMeth, sf, vf);
+			return true;
+		}
+		
+		if (SootUtil.patternSet.contains(methStr)) {		
+			ArrayList<String> methods = new ArrayList<>();
+			methods = methods4Pattern(methods, methStr);
+			
+			for (String method : methods)
+				regularStmt(vf, sf, empty, method);
+			return true;
+		}
+		
+		if (SootUtil.polyMap.containsKey(methStr)) {
+			
+			assert Scene.v().containsMethod(SootUtil.polyMap.get(methStr)) : SootUtil.polyMap.get(methStr) + "\n" + methStr;
+			SootMethod meth = Scene.v().getMethod(SootUtil.polyMap.get(methStr));
+			String name = meth.getName();
+			String declClazz = meth.getDeclaringClass().getName();
+			
+			String ret = meth.getReturnType().toString();
+			
+			// constructor
+			if (meth.isConstructor()) {
+				name = "new " + declClazz;
+				ret = declClazz;
+			}
+			
+			String polyStr = methStr.substring(methStr.indexOf("Poly") + 5);			
+			String polyPre = polyStr.substring(1, polyStr.indexOf(")")-1);
+			
+			String polyPost = "";
+			if (polyStr.contains(")(")) {
+				polyPost = polyStr.substring(polyStr.indexOf(")(")+2, polyStr.length()-1);
+				ret = polyPost;
+			}
+			
+			List<String> paramList = new ArrayList<>();
+
+			for (String item : polyPre.split(" "))
+				paramList.add(item);
+		
+			Statement s2 = sf.getStmt(name, ret, paramList);
+			s2.setStatic(meth.isStatic());
+			s2.setClazz(declClazz);
+			s2.setSootMethod(meth.getSignature());
+			DefVar dv2 = vf.getDefVar(s2.getRetType());
+			s2.setLhs(dv2);
+			stmts.add(s2);
+//			System.out.println(s2 + " args: " + s2.getArgTypes() + " ret:" + s2.getRetType() + " Holes:" + s2.getArgHoles());
+			return true;
+		}
+		
+		assert Scene.v().containsMethod(methStr) : methStr;
+		SootMethod meth = Scene.v().getMethod(methStr);
+		String name = meth.getName();
+		String declClazz = meth.getDeclaringClass().getName();
+
+		String ret = meth.getReturnType().toString();
+		// constructor
+		if (meth.isConstructor()) {
+			name = "new " + declClazz;
+			ret = declClazz;
+		}
+		List<String> paramList = new ArrayList<>();
+		if (!meth.isStatic() && !meth.isConstructor()) {
+			String recv = meth.getDeclaringClass().getName();
+			
+			paramList.add(recv);
+		}
+		for (Type t : meth.getParameterTypes()) {
+			String str = t.toString();
+			
+			if(poly) str = polyType;
+
+			paramList.add(str);
+		}
+
+		Statement s2 = sf.getStmt(name, ret, paramList);
+		s2.setStatic(meth.isStatic());
+		s2.setClazz(declClazz);
+		s2.setSootMethod(meth.getSignature());
+		DefVar dv2 = vf.getDefVar(s2.getRetType());
+		s2.setLhs(dv2);
+		stmts.add(s2);
+//		System.out.println(s2 + " args: " + s2.getArgTypes() + " ret:" + s2.getRetType() + " Holes:" + s2.getArgHoles());
+		return true;
+	}
+	
+	public ArrayList<String> methods4Pattern(ArrayList<String> patterns, String methStr) {
+		
+		String meth1 = methStr.substring(0, methStr.indexOf("<-"));
+		patterns.add(meth1);
+	
+		String meth2 = methStr.substring(methStr.indexOf("->")+2, methStr.length());
+		if (!meth2.contains("<-")) {
+			patterns.add(meth2);
+		} else {
+			patterns = methods4Pattern(patterns, meth2);
+		}
+		return patterns;
 	}
 }

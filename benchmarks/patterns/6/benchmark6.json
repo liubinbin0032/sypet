@@ -1,0 +1,22 @@
+{
+  "id": 6,
+  "description": "Rotate a rectangle about the origin according to a rotation vector",
+  "methodName": "rotate",
+  "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1"
+  ],
+  "srcTypes": [
+    "java.awt.geom.Rectangle2D",
+    "double"
+  ],
+  "tgtType": "java.awt.geom.Rectangle2D",
+  "packages": [
+    "java.awt.geom",
+    "java.awt.Shape"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/6/TestSource.java"
+}

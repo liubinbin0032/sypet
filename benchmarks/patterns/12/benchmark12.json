@@ -1,0 +1,21 @@
+{
+  "id": 12,
+  "description": "Compute the offset for a specified line in a document",
+  "methodName": "getOffsetForLine",
+  "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1"
+  ],
+  "srcTypes": [
+    "javax.swing.text.Document",
+    "int"
+  ],
+  "tgtType": "int",
+  "packages": [
+    "javax.swing.text"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/12/TestSource.java"
+}

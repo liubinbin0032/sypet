@@ -1,0 +1,19 @@
+{
+  "id": 9,
+  "description": "Compute the number of days since the specified date",
+  "methodName": "daysUntilNow",
+  "paramNames": [
+    "sypet_arg0"
+  ],
+  "srcTypes": [
+  	"org.joda.time.LocalDate"
+  ],
+  "tgtType": "int",
+  "packages": [
+    "org.joda.time"
+  ],
+  "libs": [
+    "./lib/joda-time-2.8.2.jar"
+  ],
+  "testPath": "benchmarks/patterns/9/TestSource.java"
+}

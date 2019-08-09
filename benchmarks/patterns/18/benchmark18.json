@@ -1,0 +1,24 @@
+{
+  "id": 18,
+  "description": "Change date from one format to another",
+  "methodName": "changeDateFormat",
+  "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1",
+    "sypet_arg2"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "java.lang.String",
+    "java.lang.String"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "java.text.SimpleDateFormat",
+    "java.text.DateFormat"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/18/TestSource.java"
+}

@@ -1,0 +1,19 @@
+{
+  "id": 20,
+  "description": "Read a byte from a file",
+  "methodName": "readFile",
+  "paramNames": [
+    "sypet_arg0"
+  ],
+  "srcTypes": [
+    "java.lang.String"
+  ],
+  "tgtType": "int",
+  "packages": [
+	  "java.io"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/20/TestSource.java"
+}

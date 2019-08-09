@@ -1,0 +1,21 @@
+{
+  "id": 11,
+  "description": "Find the day of the week of a date string",
+  "methodName": "dayOfWeek",
+    "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "java.lang.String"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "org.joda.time"
+  ],
+  "libs": [
+    "./lib/joda-time-2.8.2.jar"
+  ],
+  "testPath": "benchmarks/patterns/11/TestSource.java"
+}

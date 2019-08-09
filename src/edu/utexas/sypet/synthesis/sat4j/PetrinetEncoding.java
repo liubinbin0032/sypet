@@ -16,6 +16,7 @@
 package edu.utexas.sypet.synthesis.sat4j;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,11 +27,13 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
+import edu.utexas.sypet.Experiment;
 import edu.utexas.sypet.synthesis.PathFinder;
 import edu.utexas.sypet.synthesis.model.Pair;
 import edu.utexas.sypet.synthesis.model.Trio;
 import edu.utexas.sypet.synthesis.sat4j.Constraint.ConstraintType;
 import edu.utexas.sypet.synthesis.sat4j.Constraint.EncodingType;
+import edu.utexas.sypet.util.SootUtil;
 import uniol.apt.adt.pn.Flow;
 import uniol.apt.adt.pn.Node;
 import uniol.apt.adt.pn.PetriNet;
@@ -853,195 +856,10 @@ public class PetrinetEncoding {
 			problem_constraints.add(c);
 		}
 		
-		if (opt != Option.NONE) {
-			// if (false) {
-
-			// do not prefer transitions that come or go to void
-			if (petrinet.containsPlace("void")) {
-				Place voidP = petrinet.getPlace("void");
-				Constraint voidPostset = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
-						ConstraintType.LEQ, 0, EncodingType.INIT);
-
-				for (Transition t : voidP.getPostset()) {
-					Pair<Transition, Integer> pair = new Pair<>(t, 0);
-					if (!functionMap_vars.containsKey(pair))
-						continue;
-					assert functionMap_vars.containsKey(pair) : pair;
-					Variable var = functionMap_vars.get(pair);
-					assert map_eq_fn_vars.containsKey(var);
-					FunctionVar fv = map_eq_fn_vars.get(var);
-					voidPostset.addLiteral(fv, 1);
-				}
-
-				if (voidPostset.getSize() > 0) {
-					FunctionVar eq_voidpostset = new FunctionVar(index_var++, -1, null);
-					list_variables.add(eq_voidpostset);
-
-					voidPostset.addLiteral(eq_voidpostset, -voidPostset.getSize());
-					problem_constraints.add(voidPostset);
-					objective_function.addLiteral(eq_voidpostset, 1);
-				}
-
-				Constraint voidPreset = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
-						ConstraintType.LEQ, 0, EncodingType.INIT);
-				for (Transition t : voidP.getPreset()) {
-					Pair<Transition, Integer> pair = new Pair<>(t, 0);
-					if (!functionMap_vars.containsKey(pair))
-						continue;
-					assert functionMap_vars.containsKey(pair);
-					Variable var = functionMap_vars.get(pair);
-					assert map_eq_fn_vars.containsKey(var);
-					FunctionVar fv = map_eq_fn_vars.get(var);
-					voidPreset.addLiteral(fv, 1);
-				}
-
-				if (voidPreset.getSize() > 0) {
-					FunctionVar eq_voidpreset = new FunctionVar(index_var++, -1, null);
-					list_variables.add(eq_voidpreset);
-
-					voidPreset.addLiteral(eq_voidpreset, -voidPreset.getSize());
-					problem_constraints.add(voidPreset);
-					objective_function.addLiteral(eq_voidpreset, 1);
-				}
-			}
-
-			// do not prefer transitions that do clone
-			Constraint cloneCtr = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
-					ConstraintType.LEQ, 0, EncodingType.INIT);
-
-			for (Transition t : petrinet.getTransitions()) {
-				if (t.getId().startsWith("sypet_clone_")) {
-
-					Pair<Transition, Integer> pair = new Pair<>(t, 0);
-					assert functionMap_vars.containsKey(pair) : pair + " : " + maxTimeline
-							+ petrinet.containsTransition(t);
-					Variable var = functionMap_vars.get(pair);
-					assert map_eq_fn_vars.containsKey(var);
-					FunctionVar fv = map_eq_fn_vars.get(var);
-					cloneCtr.addLiteral(fv, 1);
-
-				}
-			}
-
-			if (cloneCtr.getSize() > 0) {
-				FunctionVar eq_clone = new FunctionVar(index_var++, -1, null);
-				list_variables.add(eq_clone);
-
-				cloneCtr.addLiteral(eq_clone, -cloneCtr.getSize());
-				problem_constraints.add(cloneCtr);
-				objective_function.addLiteral(eq_clone, 1);
-			}
-			
-			domainHeuristics();
-		}
+		if (Experiment.CONSTRAINT)
+			domainHeuristics4Pattern();
 	}
 	
-	protected void domainHeuristics() {
-		
-//		ArrayList<Transition> preferences = new ArrayList<>();
-//		for (Transition t : petrinet.getTransitions()){
-//			if (t.getId().contains("withMaximumValue")){
-//				preferences.add(t);
-//			}
-//		}
-//
-//		if (!preferences.isEmpty()) {
-//			Constraint dom = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(), ConstraintType.GEQ, 1);
-//			for (Transition tt : preferences) {
-//
-//				Pair<Transition, Integer> pairt = new Pair<>(tt, 0);
-//				FunctionVar vart = map_eq_fn_vars.get(functionMap_vars.get(pairt));
-//
-//				dom.addLiteral(vart, 1);
-//			}
-//
-//			FunctionVar eqdom = new FunctionVar(index_var++, -1, null);
-//			list_variables.add(eqdom);
-//			dom.addLiteral(eqdom, dom.getSize());
-//
-//			problem_constraints.add(dom);
-//			objective_function.addLiteral(eqdom, 1);
-//		}		
-		
-		ArrayList<Transition> betweenTransition = new ArrayList<>();
-		for (Transition tt : petrinet.getTransitions()){
-			// Between methods
-			if (tt.getId().contains("Between")){
-				betweenTransition.add(tt);
-			}
-			
-		}
-		
-		// Minor preference for between methods
-		if (!betweenTransition.isEmpty()) {
-			Constraint dom = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(), ConstraintType.GEQ, 1);
-			for (Transition tt : betweenTransition) {
-
-				Pair<Transition, Integer> pairt = new Pair<>(tt, 0);
-				FunctionVar vart = map_eq_fn_vars.get(functionMap_vars.get(pairt));
-
-				dom.addLiteral(vart, 1);
-			}	
-			
-			FunctionVar eqdom = new FunctionVar(index_var++, -1, null);
-			list_variables.add(eqdom);
-			dom.addLiteral(eqdom, dom.getSize());
-			
-			problem_constraints.add(dom);
-			objective_function.addLiteral(eqdom, 10);
-		}
-		
-		// Domain heuristic for point : if getX is used then we prefer getY and vice versa
-		for (Place initPlace : inits) {
-
-			if (initPlace.getId().equals("java.awt.geom.Point2D") || initPlace.getId().equals("java.awt.Point")) {
-				ArrayList<Variable> getters = new ArrayList<Variable>();
-				for (Transition t : initPlace.getPostset()) {
-					if (!t.getId().contains("getX") && !t.getId().contains("getY"))
-						continue;
-
-					Pair<Transition, Integer> pair = new Pair<>(t, 0);
-					Variable fv = functionMap_vars.get(pair);
-					getters.add(map_eq_fn_vars.get(fv));
-				}
-
-				if (!getters.isEmpty()) {
-
-					FunctionVar eqPoint2D = new FunctionVar(index_var++, -1, null);
-					list_variables.add(eqPoint2D);
-					Constraint ato = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
-							ConstraintType.GEQ, 1);
-					for (int i = 0; i < getters.size(); i++) {
-						ato.addLiteral(getters.get(i), 1);
-						for (int j = 0; j < getters.size(); j++) {
-							if (i == j)
-								continue;
-
-							Constraint req = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
-									ConstraintType.GEQ, 0);
-							req.addLiteral(getters.get(i), -1);
-							req.addLiteral(getters.get(j), 1);
-							req.addLiteral(eqPoint2D, 1);
-							problem_constraints.add(req);
-
-							Constraint leq = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
-									ConstraintType.GEQ, 0);
-							leq.addLiteral(getters.get(i), 1);
-							leq.addLiteral(getters.get(j), -1);
-							leq.addLiteral(eqPoint2D, 1);
-							problem_constraints.add(leq);
-
-						}
-					}
-					ato.addLiteral(eqPoint2D, 1);
-					problem_constraints.add(ato);
-					objective_function.addLiteral(eqPoint2D, 100);
-				}
-			}
-		}
-		
-	}
-
 	public List<Integer> getObjectiveValues() {
 		return objective_values;
 	}
@@ -1240,6 +1058,99 @@ public class PetrinetEncoding {
 	
 	public PetriNet getPetriNet() {
 		return petrinet;
+	}
+	
+	protected void domainHeuristics4Pattern() { 
+		for (String pattern : Experiment.consList) {
+			ArrayList<String> patterns = new ArrayList<>(Arrays.asList(pattern.split(", ")));
+			
+			if (patterns.size() > 2)
+				continue;
+			
+			ArrayList<String> transList = new ArrayList<>();
+			
+			// add constraint for each two method
+			String ptn1 = patterns.get(0);
+			String class_name1 = ptn1.substring(0, ptn1.lastIndexOf("."));
+			String method_name1 = ptn1.substring(ptn1.lastIndexOf(".")+1);
+			String ptn2 = patterns.get(1);
+			String class_name2 = ptn2.substring(0, ptn2.lastIndexOf("."));
+			String method_name2 = ptn2.substring(ptn2.lastIndexOf(".")+1);
+			
+			if (!class_name1.equals(class_name2))
+				continue;
+			if (method_name1.equals(method_name2))
+				continue;
+			
+			for (Transition t : petrinet.getTransitions()) {
+				if (SootUtil.patternSet.contains(t.getId()))
+					continue;
+				
+				if (t.getId().contains(class_name1 + ":") && t.getId().contains(method_name1 + "()")) {
+					transList.add(t.getId());
+					break;
+				}
+			}
+			
+			for (Transition t : petrinet.getTransitions()) {
+				if (SootUtil.patternSet.contains(t.getId()))
+					continue;
+				
+				if (t.getId().contains(class_name2 + ":") && t.getId().contains(method_name2 + "()")) {
+					transList.add(t.getId());
+					break;
+				}
+			}
+
+			if (transList.size() == 2) {
+				// System.out.println(transList);
+				ArrayList<Variable> patternList = new ArrayList<Variable>();
+	
+				String pt1 = transList.get(0);
+				String pt2 = transList.get(1);
+				
+				Pair<Transition, Integer> pair1 = new Pair<>(petrinet.getTransition(pt1), 0);
+				Variable fv1 = functionMap_vars.get(pair1);
+				patternList.add(map_eq_fn_vars.get(fv1));
+				
+				Pair<Transition, Integer> pair2 = new Pair<>(petrinet.getTransition(pt2), 0);
+				Variable fv2 = functionMap_vars.get(pair2);
+				patternList.add(map_eq_fn_vars.get(fv2));
+	
+				// System.out.println(patternList);
+				if (!patternList.isEmpty()) {
+					
+					FunctionVar eqPattern = new FunctionVar(index_var++, -1, null);
+					list_variables.add(eqPattern);
+					Constraint ato = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
+							ConstraintType.GEQ, 1);
+					for (int i = 0; i < patternList.size(); i++) {
+						ato.addLiteral(patternList.get(i), 1);
+						for (int j = 0; j < patternList.size(); j++) {
+							if (i == j)
+								continue;
+		
+							Constraint req = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
+									ConstraintType.GEQ, 0);
+							req.addLiteral(patternList.get(i), -1);
+							req.addLiteral(patternList.get(j), 1);
+							req.addLiteral(eqPattern, 1);
+							problem_constraints.add(req);
+		
+							Constraint leq = new Constraint(new ArrayList<Variable>(), new ArrayList<Integer>(),
+									ConstraintType.GEQ, 0);
+							leq.addLiteral(patternList.get(i), 1);
+							leq.addLiteral(patternList.get(j), -1);
+							leq.addLiteral(eqPattern, 1);
+							problem_constraints.add(leq);
+						}
+					}
+					ato.addLiteral(eqPattern, 1);
+					problem_constraints.add(ato);
+					objective_function.addLiteral(eqPattern, 100);
+				}
+			}
+		}
 	}
 	
 }

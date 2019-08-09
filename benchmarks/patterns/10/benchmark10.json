@@ -1,0 +1,21 @@
+{
+  "id": 10,
+  "description": "Find the number of days of a specified month",
+  "methodName": "daysOfMonth",
+    "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "java.lang.String"
+  ],
+  "tgtType": "int",
+  "packages": [
+    "org.joda.time"
+  ],
+  "libs": [
+    "./lib/joda-time-2.8.2.jar"
+  ],
+  "testPath": "benchmarks/patterns/10/TestSource.java"
+}

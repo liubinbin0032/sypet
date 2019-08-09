@@ -21,6 +21,8 @@ public class Config {
 
 	private List<String> blacklist;
 	
+	private List<String> localSuperClasses;
+	
 	private List<String> poly;
 	
 	private List<String> buildinPkg;
@@ -36,4 +38,5 @@ public class Config {
 	public List<String> getPoly() {
 		return poly;
 	}
+
 }

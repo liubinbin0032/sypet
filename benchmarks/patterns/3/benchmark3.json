@@ -1,0 +1,19 @@
+ {
+  "id": 3,
+  "description": "Compute the pseudo-inverse of a matrix using Singular Value Decomposition",
+  "methodName": "invert",
+  "paramNames": [
+    "sypet_arg0"
+  ],
+  "srcTypes": [
+    "double[][]"
+  ],
+  "tgtType": "double[][]",
+  "packages": [
+    "org.apache.commons.math.linear"
+  ],
+  "libs": [
+    "./lib/commons-math-2.2.jar"
+  ],
+  "testPath": "benchmarks/patterns/3/TestSource.java"
+}

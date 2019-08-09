@@ -1,0 +1,3 @@
+String.String(byte[],int,int,int)
+String.String(byte[],int)
+String.getBytes(int,int,byte[],int)

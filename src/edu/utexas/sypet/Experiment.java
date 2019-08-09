@@ -21,20 +21,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
 import edu.utexas.sypet.synthesis.PathFinder;
 import edu.utexas.sypet.synthesis.Sketcher;
 import edu.utexas.sypet.synthesis.SypetTestUtil;
 import edu.utexas.sypet.synthesis.model.Benchmark;
+import edu.utexas.sypet.synthesis.model.Config;
 import edu.utexas.sypet.synthesis.model.Pair;
 import edu.utexas.sypet.synthesis.sat4j.PetrinetEncoding.Option;
 import edu.utexas.sypet.util.SootUtil;
 import edu.utexas.sypet.util.TimeUtil;
-import polyglot.ext.jl.types.PlaceHolder_c;
 import soot.CompilationDeathException;
 import soot.Scene;
 import soot.options.Options;
@@ -51,12 +55,23 @@ public class Experiment {
 	public static boolean VERBOSE = false;
 	public static String benchLoc = null;
 	public static long TIMEOUT = 600000;
+	
+	public static boolean PATTERN = false;
+	public static boolean CONSTRAINT = false;
+	public static boolean INHERI = false;
 
 	public static final int maxTokens = 10;
 
 	public static Option objectiveOption = Option.AT_LEAST_ONE;
 	public static int maxIterations = 5;
 
+	public static List<String> ptnList = null;
+	public static List<String> pathList = null;
+	public static List<String> consList = null;
+	
+	private static Config cfg;
+	private static Map<String, Set<String>> superclassMap;
+	
 	public static List<String> clones;
 
 	public static PathFinder initPetriNet(Benchmark qb, List<PetriNet> pNetList, int pn, int local) {
@@ -100,7 +115,7 @@ public class Experiment {
 		int roundRobinIterations = 0;
 		int roundRobinIterationsLimit = 40;
 		int roundRobinRange = 3;
-		boolean roundRobinFlag = true;
+		boolean roundRobinFlag = false;
 
 		Cli cmdOptions = new Cli(args);
 		cmdOptions.parse();
@@ -108,11 +123,17 @@ public class Experiment {
 		VERBOSE = cmdOptions.getVerbose();
 		TIMEOUT = cmdOptions.getTimeout();
 		roundRobinFlag = cmdOptions.getRoundRobin();
+		
+		PATTERN = cmdOptions.getPattern();
+		CONSTRAINT = cmdOptions.getConstraint();
+		INHERI = cmdOptions.getInheri();
+		int pattern_num = cmdOptions.getPatternNum();
+		
 		// The objective function can be used to add preferences over which
 		// methods to explore
 		objectiveOption = objectiveOption.AT_LEAST_ONE;
 		maxIterations = cmdOptions.getSolverLimit();
-
+		
 		cmdOptions.printOptions();
 
 		benchLoc = cmdOptions.getFilename();
@@ -171,6 +192,25 @@ public class Experiment {
 
 			Scene.v().loadBasicClasses();
 			Scene.v().loadNecessaryClasses();
+			
+			if (PATTERN || CONSTRAINT) {
+				ptnList = new ArrayList<>();
+				pathList = new ArrayList<>();
+				consList = new ArrayList<>();
+				for (String patternFile: pkgs) {
+					patternFile = patternFile + ".json";
+					Patterns ptn = initPtn(patternFile);
+					int num = 0;
+					for (String str : ptn.getPatterns()) {
+						if (++num > pattern_num)
+							break;
+						ptnList.add(str);
+					}
+				}
+			}
+			
+			SootUtil.deprecatedSet = getDeprecatedSet(pkgs);
+//			System.out.println(SootUtil.deprecatedSet);
 
 			List<PetriNet> pNetList = new ArrayList<>();
 
@@ -178,18 +218,44 @@ public class Experiment {
 			// FIXME: get lower bound. Will place with shortest path.
 			// int low = Math.max(1, SootUtil.getLowerBound(qb));
 			int low = 1;
+			
+			if (cfg == null)
+				initCfg();
+			assert cfg != null;
+			List<String> polyList = cfg.getPoly();
+			superclassMap = new HashMap<>();
+			for (String raw : polyList) {
+				// left is the subclass of rt. i.e., rt <= left.
+				String left = raw.split(",")[0];
+				String rt = raw.split(",")[1];
+				if (superclassMap.containsKey(left)) {
+					superclassMap.get(left).add(rt);
+				} else {
+					Set<String> subclass = new HashSet<>();
+					subclass.add(rt);
+					superclassMap.put(left, subclass);
+				}
+			}
 
 			PetriNet pNet = new PetriNet();
 			// only one petrinet without pruning.
 			for (String lib : qb.getLibs()) {
-				SootUtil.processJar(lib, pkgs, pNet);
+				SootUtil.processJar(lib, pkgs, pNet, superclassMap);
 			}
-			SootUtil.handlePolymorphism(pNet);
+			
+			if (INHERI)
+				SootUtil.copyPolymorphism(pNet);
+			else
+				SootUtil.handlePolymorphism(pNet);
+			
+			if (PATTERN || CONSTRAINT)
+				SootUtil.handlePattern(pNet, ptnList);
+			
 			System.out.println("#Classes: " + SootUtil.classNum);
 			System.out.println("#Methods: " + SootUtil.methodNum);
 			long endSoot = System.nanoTime();
 			double sootTime = TimeUtil.computeTime(startSoot, endSoot);
-			System.out.println("Soot Time: " + sootTime);
+//			System.out.println("Soot Time: " + sootTime);
 			pNetList.add(pNet);
 
 			// Multiple args: check if we need put clone as initial constraints.
@@ -295,18 +361,18 @@ public class Experiment {
 						if (passTest) {
 							System.out.println("=========Statistics (time in milliseconds)=========");
 							System.out.println("Benchmark Id: " + qb.getId());
+							System.out.println("Soot Time: " + sootTime);
 							System.out.println("Sketch Generation Time: " + timeGetPath);
 							System.out.println("Sketch Completion Time: " + (timeInitSketch + timeFillHoles));
 							System.out.println("Compilation Time: " + timeCompilation);
 							System.out.println("Running Test cases Time: " + timeRunTest);
-							System.out.println(
-									"Synthesis Time: " + (timeGetPath + timeInitSketch + timeFillHoles + timeRunTest));
-							System.out.println("Total Time: "
-									+ (timeGetPath + timeInitSketch + timeFillHoles + timeRunTest + timeCompilation));
+							System.out.println("Synthesis Time: " + (timeGetPath + timeInitSketch + timeFillHoles  + timeCompilation + timeRunTest));
+							System.out.println("Total Time: " + (sootTime + timeGetPath + timeInitSketch + timeFillHoles + timeRunTest + timeCompilation));
 							System.out.println("Number of components: " + res.size());
 							System.out.println("Number of holes: " + sk.getHolesNum());
 							System.out.println("Number of completed programs: " + cntFillHoles);
 							System.out.println("Number of sketches: " + cnt);
+							System.out.println("current sketch:" + res);
 							System.out.println("Solution:\n " + snippet.replace(";", ";\n "));
 
 							System.out.println("============================");
@@ -384,5 +450,57 @@ public class Experiment {
 			e.printStackTrace();
 		}
 		return builder.toString();
+	}
+	
+	protected static Patterns initPtn(String path) {
+		Patterns ptn = null;
+		try {
+			JsonReader reader = new JsonReader(new FileReader("data/patterns/" + path));
+			Gson gson = new Gson();
+			ptn = gson.fromJson(reader, Patterns.class);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return ptn;
+	}
+	
+	protected static Set<String> getDeprecatedSet(Set<String> packages) {
+		Set<String> itemSet = new HashSet<>();
+		for (String pkg: packages) {
+			File file = new File("data/deprecated/"+pkg + ".txt");
+			if (!file.exists())
+				continue;
+			BufferedReader reader = null;
+			try {
+				reader = new BufferedReader(new FileReader(file));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			String line = "";
+			try {
+				while ((line = reader.readLine()) != null) {
+					String methodName = line.substring(line.indexOf(".")+1, line.indexOf("("));
+					if (line.substring(0, line.indexOf(".")).equals(methodName))
+						line = line.substring(0, line.indexOf(".")).concat(".<init>")
+						.concat(line.substring(line.indexOf("("), line.length()));
+					itemSet.add(line);
+				}
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+//		System.out.println("Size: " + itemSet.size());
+		return itemSet;
+	}
+	
+	protected static void initCfg() {
+		try {
+			JsonReader reader = new JsonReader(new FileReader("CONFIG.json"));
+			Gson gson = new Gson();
+			cfg = gson.fromJson(reader, Config.class);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

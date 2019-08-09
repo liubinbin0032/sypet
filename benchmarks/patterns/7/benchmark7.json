@@ -1,0 +1,24 @@
+{
+  "id": 7,
+  "description": "Perform a translation on a given rectangle",
+  "methodName": "translate",
+  "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1",
+    "sypet_arg2"
+  ],
+  "srcTypes": [
+    "java.awt.geom.Rectangle2D",
+    "double",
+    "double"
+  ],
+  "tgtType": "java.awt.geom.Rectangle2D",
+  "packages": [
+    "java.awt.geom",
+    "java.awt.Shape"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/7/TestSource.java"
+}

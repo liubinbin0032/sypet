@@ -1,0 +1,23 @@
+{
+  "id": 16,
+  "description": "Replace string with regular expression",
+  "methodName": "repalceWithRegex",
+  "paramNames": [
+    "sypet_arg0",
+    "sypet_arg1",
+    "sypet_arg2"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "java.lang.String",
+    "java.lang.String"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "java.util.regex"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/16/TestSource.java"
+}

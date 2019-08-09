@@ -1,0 +1,20 @@
+{
+  "id": 15,
+  "description": "Create a document with a specified element",
+  "methodName": "createDom",
+  "paramNames": [
+    "sypet_arg0"
+  ],
+  "srcTypes": [
+    "java.lang.String"
+  ],
+  "tgtType": "org.w3c.dom.Document",
+  "packages": [
+    "org.w3c.dom",
+    "javax.xml.parsers"
+  ],
+  "libs": [
+    "./lib/rt7.jar"
+  ],
+  "testPath": "benchmarks/patterns/15/TestSource.java"
+}

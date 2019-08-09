@@ -1,0 +1,3 @@
+DefaultTextUI.DefaultTextUI()
+View.modelToView(int,Shape)
+View.viewToModel(float,float,Shape)
